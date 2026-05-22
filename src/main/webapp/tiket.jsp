@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 #halo
 #wassap
+#rupiahmenguat
 
 <!DOCTYPE html>
 <html>
