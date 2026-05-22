@@ -8,6 +8,7 @@
 #halo
 #wassap
 #rupiahmenguat
+#didesagapakedolar
 
 <!DOCTYPE html>
 <html>
