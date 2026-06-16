@@ -55,13 +55,29 @@ public class KursiServlet extends HttpServlet {
             }
             request.setAttribute("takenSeatsFormatted", takenSeatsFormatted.toString()); 
             
+            int rows = 8;
+            int cols = 10;
             if (jadwal.getNamaStudio().toLowerCase().contains("premier")) {
-                request.setAttribute("seatRows", 6);
-                request.setAttribute("seatCols", 8);
-            } else {
-                request.setAttribute("seatRows", 8);
-                request.setAttribute("seatCols", 10);
+                rows = 6;
+                cols = 8;
             }
+            request.setAttribute("seatRows", rows);
+            request.setAttribute("seatCols", cols);
+
+            // --- IMPLEMENTASI OOP ---
+            model.Studio studioOOP = new model.Studio(jadwal.getStudioId(), jadwal.getNamaStudio(), rows, cols);
+            for (String seat : takenSeats) {
+                if(seat == null || seat.trim().isEmpty()) continue;
+                int r = seat.charAt(0) - 'A';
+                int c = 0;
+                try {
+                    // Dalam UI, kolom dimulai dari 1. Di matriks Studio, dimulai dari 0.
+                    c = Integer.parseInt(seat.substring(1)) - 1;
+                    studioOOP.pesanKursi(r, c);
+                } catch (Exception e) {}
+            }
+            request.setAttribute("sisaKursiOOP", studioOOP.getSisaKursi());
+            // ------------------------
 
             request.getRequestDispatcher("/pilihKursi.jsp").forward(request, response);
             

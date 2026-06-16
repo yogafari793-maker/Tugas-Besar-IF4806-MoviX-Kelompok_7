@@ -84,9 +84,31 @@ public class CheckoutServlet extends HttpServlet {
             session.setAttribute("selectedSeats", selectedSeats);
             session.setAttribute("jumlahKursi", selectedSeats.length);
             
-            double subtotal = jadwal.getHarga() * selectedSeats.length;
+            // --- IMPLEMENTASI OOP ---
+            Transaksi transaksiOOP = new Transaksi();
+            for (String seat : selectedSeats) {
+                // Parsing seat misal "A1"
+                int baris = seat.charAt(0) - 'A';
+                int kolom = 0;
+                try {
+                    kolom = Integer.parseInt(seat.substring(1));
+                } catch (Exception e) {}
+                
+                model.Tiket tiket;
+                if (jadwal.getNamaStudio().toLowerCase().contains("premier")) {
+                    tiket = new model.TiketPremiere("TKT-" + seat, baris, kolom, jadwal);
+                } else {
+                    tiket = new model.TiketReguler("TKT-" + seat, baris, kolom, jadwal);
+                }
+                transaksiOOP.tambahTiket(tiket);
+            }
+            // Menggunakan Polymorphism dari Tiket.hitungHarga() via Transaksi.hitungTotal()
+            double subtotal = transaksiOOP.hitungTotal();
+            // ------------------------
+            
             session.setAttribute("subtotal", subtotal);
             session.setAttribute("subtotalFormatted", formatRupiah(subtotal));
+            session.setAttribute("transaksiOOP", transaksiOOP);
             
             // Reset promo and success flags
             session.removeAttribute("kodePromo");

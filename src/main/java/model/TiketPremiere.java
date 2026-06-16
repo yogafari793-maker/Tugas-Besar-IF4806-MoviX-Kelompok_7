@@ -18,11 +18,7 @@ public class TiketPremiere extends Tiket {
 
     @Override
     public double hitungHarga() {
-        String hari = super.getJadwal().getHari().toLowerCase();
-        if (hari.equals("sabtu") || hari.equals("minggu")) {
-            return HARGA_WEEKEND;
-        } else {
-            return HARGA_WEEKDAY;
-        }
+        // Menggunakan harga dasar dari Jadwal Tayang Database
+        return super.getJadwal().getHarga();
     }
 }

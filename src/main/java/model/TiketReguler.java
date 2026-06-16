@@ -19,14 +19,7 @@ public class TiketReguler extends Tiket {
 
     @Override
     public double hitungHarga() {
-        // Asumsi kelas JadwalTayang memiliki method getHari()
-        String hari = super.getJadwal().getHari().toLowerCase();
-        
-        // Cek jika hari adalah Sabtu atau Minggu (Weekend)
-        if (hari.equals("sabtu") || hari.equals("minggu")) {
-            return HARGA_WEEKEND;
-        } else {
-            return HARGA_WEEKDAY;
-        }
+        // Menggunakan harga dasar dari Jadwal Tayang Database
+        return super.getJadwal().getHarga();
     }
 }
