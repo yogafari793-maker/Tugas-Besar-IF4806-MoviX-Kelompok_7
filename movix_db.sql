@@ -126,4 +126,7 @@ INSERT INTO transaksi (kode_booking, user_id, jadwal_id, jumlah_kursi, kursi_dip
 INSERT INTO promo (kode_promo, tipe_diskon, nilai_diskon, deskripsi) VALUES 
 ('MOVIX50', 'nominal', 50000, 'Diskon Rp 50.000 untuk pengguna baru'),
 ('WEEKEND10', 'persentase', 10, 'Diskon 10% Spesial Akhir Pekan'),
-('MAHASISWA', 'nominal', 15000, 'Potongan Rp 15.000 Khusus Mahasiswa');
+('MAHASISWA', 'nominal', 15000, 'Potongan Rp 15.000 Khusus Mahasiswa'),
+('MABAR20', 'persentase', 20, 'Diskon 20% Nonton Bareng Teman'),
+('GAJIAN', 'nominal', 25000, 'Diskon Rp 25.000 Spesial Tanggal Muda'),
+('MIDNIGHT', 'persentase', 15, 'Diskon 15% Nonton Jam Malam');
