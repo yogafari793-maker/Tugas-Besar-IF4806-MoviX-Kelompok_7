@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package servlet; // 1. Pastikan nama packagenya murni 'servlet'
+package servlet;
 
-import dao.JadwalDAO;          // 2. Tambahkan/pastikan import ini benar
-import model.JadwalTayang;      // 3. Tambahkan/pastikan import ini benar
-import java.util.List;          // 4. Pastikan import List ada
+import dao.JadwalDAO;
+import model.JadwalTayang;
+import java.util.List;
 
 import java.io.IOException;
 // Jika Anda menggunakan Tomcat 10+ / GlassFish 6+, gunakan jakarta.servlet
@@ -15,7 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession; // Tambahkan import session
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -33,13 +33,13 @@ public class jadwalServlet extends HttpServlet {
         String path = request.getServletPath();
         String filmIdParam = request.getParameter("filmId");
 
-        // VALIDASI: Jika tidak membawa ID Film, balikkan paksa ke index katalog film utama
+
         if (filmIdParam == null || filmIdParam.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/katalog");
             return;
         }
 
-        // ALUR 2: Jika URL murni '/jadwal' dan membawa filmId -> Arahkan ke pilihan TIKET (Langkah 2)
+
         if ("/jadwal".equals(path)) {
             try {
                 int filmId = Integer.parseInt(filmIdParam);
@@ -59,7 +59,7 @@ public class jadwalServlet extends HttpServlet {
             return;
         }
 
-        // ALUR 3: Jika URL mengandung '/reguler' atau '/premier' -> Tampilkan WAKTU JADWAL (Langkah 3)
+
         String tipe = path.endsWith("premier") ? "premier" : "reguler";
         List<JadwalTayang> jadwalList;
 

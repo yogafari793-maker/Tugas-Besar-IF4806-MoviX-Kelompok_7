@@ -347,7 +347,7 @@
                 </div>
             </div>
 
-            <!-- Menampilkan Data Dari Database Menggunakan JSTL -->
+
             <div class="movie-grid">
                 <c:choose>
                     <c:when test="${empty daftarFilm}">
@@ -360,14 +360,14 @@
                         <c:forEach var="film" items="${daftarFilm}">
                             
                             <div class="movie-card">
-                                <!-- Gambar Poster Asli -->
+
                                 <div class="poster-wrapper">
                                     <c:choose>
                                         <c:when test="${not empty film.posterUrl}">
                                             <img src="${film.posterUrl}" alt="${film.judul}" class="movie-poster">
                                         </c:when>
                                         <c:otherwise>
-                                            <!-- Fallback jika poster tidak ada -->
+
                                             <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#1D2432;">
                                                 <i class="fa-solid fa-image fa-3x" style="color:#323E4F;"></i>
                                             </div>
@@ -375,7 +375,7 @@
                                     </c:choose>
                                 </div>
 
-                                <!-- Info Film -->
+
                                 <div class="movie-info">
                                     <h2 class="movie-title">${film.judul}</h2>
                                     
@@ -389,7 +389,7 @@
                                         ${film.sinopsis}
                                     </p>
                                     
-                                    <!-- Menghubungkan Katalog dengan Halaman Tiket Milik Ghifari -->
+
                                     <a href="${pageContext.request.contextPath}/jadwal?filmId=${film.id}" class="btn-buy">
                                         Pilih Jadwal & Tiket
                                     </a>
