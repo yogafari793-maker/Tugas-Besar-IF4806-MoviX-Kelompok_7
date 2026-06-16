@@ -5,6 +5,8 @@
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 <html lang="id">
     <head>
@@ -484,7 +486,14 @@
 
         <div class="film-banner">
             <div class="film-info">
-                <img src="${posterUrl}" alt="poster" class="film-poster">
+                <c:choose>
+                    <c:when test="${fn:startsWith(posterUrl, 'http')}">
+                        <img src="${posterUrl}" alt="poster" class="film-poster" referrerpolicy="no-referrer">
+                    </c:when>
+                    <c:otherwise>
+                        <img src="<%= request.getContextPath() %>/${posterUrl}" alt="poster" class="film-poster">
+                    </c:otherwise>
+                </c:choose>
                 <div class="film-meta">
                     <h2>${filmTitle}</h2>
                     <p>${filmDate} · ${filmTime} · ${studioName}</p>

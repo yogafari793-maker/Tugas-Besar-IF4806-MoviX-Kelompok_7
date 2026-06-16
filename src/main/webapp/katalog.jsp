@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -364,7 +365,14 @@
                                 <div class="poster-wrapper">
                                     <c:choose>
                                         <c:when test="${not empty film.posterUrl}">
-                                            <img src="${film.posterUrl}" alt="${film.judul}" class="movie-poster">
+                                            <c:choose>
+                                                <c:when test="${fn:startsWith(film.posterUrl, 'http')}">
+                                                    <img src="${film.posterUrl}" alt="${film.judul}" class="movie-poster" referrerpolicy="no-referrer">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <img src="<%= request.getContextPath() %>/${film.posterUrl}" alt="${film.judul}" class="movie-poster">
+                                                </c:otherwise>
+                                            </c:choose>
                                         </c:when>
                                         <c:otherwise>
 
