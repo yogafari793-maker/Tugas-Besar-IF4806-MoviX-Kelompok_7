@@ -57,11 +57,9 @@ Sebelum menjalankan aplikasi, pastikan perangkat telah terpasang:
 ### Konfigurasi Database
 Buka file `Dbconnection.java` dan samakan seperti berikut:
 ```java
-private static final String HOST     = "localhost";
-private static final String PORT     = "3306";
-private static final String DATABASE = "movix";
-private static final String USER     = "root";
-private static final String PASSWORD = "";
+private static final String URL = "jdbc:mysql://localhost:3306/movix";
+private static final String USERNAME = "root";
+private static final String PASSWORD = "password"; 
 ```
 
 ### Menjalankan Aplikasi
