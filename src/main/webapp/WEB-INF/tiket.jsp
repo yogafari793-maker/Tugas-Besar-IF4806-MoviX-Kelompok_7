@@ -46,9 +46,15 @@
                 text-decoration:none; 
             }
             .logo { 
-                font-size:28px; 
-                font-weight:bold; 
-                color:#E51919; 
+                font-family: 'Inter', Arial, sans-serif;
+                font-size: 28px; 
+                font-weight: 800; 
+                letter-spacing: -0.5px;
+                color: white; 
+                text-decoration: none;
+            }
+            .logo span {
+                color: #E51919;
             }
             .header-info { 
                 text-align:center; 
@@ -132,8 +138,8 @@
         %>
         <div class="container">
             <div class="top-bar">
-                <a href="${pageContext.request.contextPath}/" class="btn-back">← Kembali Cari Film</a>
-                <div class="logo"><span style="color:white;">Movi</span>X</div>
+                <a href="${pageContext.request.contextPath}/katalog" class="btn-back">← Kembali Cari Film</a>
+                <div class="logo">Movi<span>X</span></div>
             </div>
 
             <div class="header-info">
