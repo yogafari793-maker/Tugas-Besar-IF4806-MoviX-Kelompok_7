@@ -300,7 +300,6 @@
         <div class="navbar-nav">
             <a href="index.html" class="nav-link">Beranda</a>
             <a href="katalog" class="nav-link active">Katalog Film</a>
-            <a href="#" class="nav-link">Riwayat</a>
             <a href="login.jsp" class="nav-link"><i class="fa-solid fa-sign-out-alt"></i> Keluar</a>
         </div>
     </nav>
