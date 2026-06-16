@@ -30,6 +30,7 @@
             box-shadow: 0px 4px 20px rgba(0,0,0,0.6);
             background-color: #0B0E14;
             border: 1px solid #1E2530;
+            color: white;
         }
 
         .logo { 
@@ -63,6 +64,15 @@
 
         .form-floating > label {
             color: #8E97A4;
+        }
+        
+        .form-floating > label::after {
+            background-color: transparent !important;
+        }
+
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label {
+            color: white !important;
         }
         
         .form-floating > .form-control:-webkit-autofill {
