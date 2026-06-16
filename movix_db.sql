@@ -58,6 +58,15 @@ CREATE TABLE IF NOT EXISTS transaksi (
     FOREIGN KEY (jadwal_id) REFERENCES jadwal_tayang(id) ON DELETE CASCADE
 );
 
+-- 6. Tabel Promo
+CREATE TABLE IF NOT EXISTS promo (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    kode_promo VARCHAR(50) NOT NULL UNIQUE,
+    tipe_diskon ENUM('nominal', 'persentase') NOT NULL,
+    nilai_diskon DOUBLE NOT NULL,
+    deskripsi VARCHAR(255)
+);
+
 -- ==========================================
 -- INSERT DUMMY DATA
 -- ==========================================
@@ -112,3 +121,9 @@ INSERT INTO jadwal_tayang (film_id, studio_id, hari, jam_tayang, harga) VALUES
 -- Data Transaksi
 INSERT INTO transaksi (kode_booking, user_id, jadwal_id, jumlah_kursi, kursi_dipilih, total_harga, kode_promo) VALUES 
 ('MVX-00123', 2, 1, 2, 'A4, B5', 70000, NULL);
+
+-- Data Promo
+INSERT INTO promo (kode_promo, tipe_diskon, nilai_diskon, deskripsi) VALUES 
+('MOVIX50', 'nominal', 50000, 'Diskon Rp 50.000 untuk pengguna baru'),
+('WEEKEND10', 'persentase', 10, 'Diskon 10% Spesial Akhir Pekan'),
+('MAHASISWA', 'nominal', 15000, 'Potongan Rp 15.000 Khusus Mahasiswa');
