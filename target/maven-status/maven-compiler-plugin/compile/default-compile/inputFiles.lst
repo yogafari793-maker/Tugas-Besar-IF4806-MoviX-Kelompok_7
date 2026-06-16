@@ -1,5 +1,7 @@
 Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\dao\FilmDAO.java
 Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\dao\JadwalDAO.java
+Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\dao\PromoDAO.java
+Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\dao\TransaksiDAO.java
 Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\dao\UserDAO.java
 Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\model\Admin.java
 Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\model\DiskonNominal.java
@@ -16,6 +18,8 @@ Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\model\
 Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\model\Transaksi.java
 Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\servlet\AdminServlet.java
 Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\servlet\AuthServlet.java
+Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\servlet\CheckoutServlet.java
 Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\servlet\jadwalServlet.java
 Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\servlet\KatalogServlet.java
+Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\servlet\KursiServlet.java
 Q:\Semester 4\PBO\TUBES\Tugas-Besar-IF4806-MoviX-Kelompok_7\src\main\java\util\Dbconnection.java

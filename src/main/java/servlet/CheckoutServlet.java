@@ -52,7 +52,7 @@ public class CheckoutServlet extends HttpServlet {
         String aksi = request.getParameter("aksi");
         HttpSession session = request.getSession();
         
-        Pengguna user = (Pengguna) session.getAttribute("user");
+        Pengguna user = (Pengguna) session.getAttribute("loggedInUser");
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login.jsp");
             return;

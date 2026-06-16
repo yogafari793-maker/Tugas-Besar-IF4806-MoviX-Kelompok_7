@@ -164,7 +164,7 @@
                     <input type="text" name="kodePromo" class="form-control" placeholder="Masukkan kode promo..." value="${sessionScope.kodePromo != null ? sessionScope.kodePromo : ''}">
                     <button type="submit" class="btn-secondary">Gunakan</button>
                 </div>
-                <% if (sessionScope.kodePromo != null) { %>
+                <% if (session.getAttribute("kodePromo") != null) { %>
                     <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">
                         Promo aktif: <strong>${sessionScope.promoDeskripsi}</strong> 
                         (<a href="${pageContext.request.contextPath}/checkout?aksi=hapusPromo" style="color: var(--accent); text-decoration: none;">Hapus</a>)
@@ -178,7 +178,7 @@
             <button type="submit" class="btn-primary" ${sessionScope.bayarSukses != null ? 'style="display:none;"' : ''}>Konfirmasi Pembayaran</button>
         </form>
         
-        <% if (sessionScope.bayarSukses != null) { %>
+        <% if (session.getAttribute("bayarSukses") != null) { %>
             <div class="alert alert-success" style="text-align: center; margin-top: 20px;">
                 <strong>Pembayaran Berhasil!</strong><br>
                 Pesanan tiket Anda telah terkonfirmasi. Silakan simpan Struk Digital Anda.
@@ -205,7 +205,10 @@
                 <span class="val">Rp ${sessionScope.subtotalFormatted}</span>
             </div>
             
-            <% if (sessionScope.diskon > 0) { %>
+            <% 
+                Double diskonVal = (Double) session.getAttribute("diskon");
+                if (diskonVal != null && diskonVal > 0) { 
+            %>
             <div class="row-info">
                 <span class="label">Diskon Promo</span>
                 <span class="val text-green">- Rp ${sessionScope.diskonFormatted}</span>
@@ -223,7 +226,7 @@
             </div>
 
             <div class="qr-box">
-                <% if (sessionScope.bayarSukses != null) { %>
+                <% if (session.getAttribute("bayarSukses") != null) { %>
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${sessionScope.kodeBooking}&bgcolor=1c2030&color=e8eaf0" alt="QR Code" width="120" height="120" style="border-radius: 8px;">
                     <span>Scan at the gate</span>
                 <% } else { %>
