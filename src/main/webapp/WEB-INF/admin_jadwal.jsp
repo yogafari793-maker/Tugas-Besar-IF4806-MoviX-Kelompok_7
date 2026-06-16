@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Panel Admin: Kelola Data ΓÇö MoviX</title>
+        <title>Panel Admin: Kelola Data - MoviX</title>
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
             body { background: #05070D; color: white; padding: 30px; }
@@ -47,13 +47,13 @@
     <body>
         <div class="container">
             <div class="header-admin">
-                <a href="<%= request.getContextPath() %>/katalog" class="btn-back">ΓåÉ Kembali ke Katalog</a>
+                <a href="<%= request.getContextPath() %>/katalog" class="btn-back">&larr; Kembali ke Katalog</a>
                 <div><span class="badge-admin">Admin Dashboard</span></div>
                 <div class="logo"><span>Movi</span>X</div>
             </div>
 
             <c:if test="${not empty success}">
-                <div class="alert-success">Γ£ô ${success}</div>
+                <div class="alert-success">&#10003; ${success}</div>
             </c:if>
 
             <div class="tab-buttons">
