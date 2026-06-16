@@ -157,7 +157,16 @@
                             </div>
                             <div class="form-group">
                                 <label>Rating Usia</label>
-                                <input type="text" name="ratingUsia" id="ratingUsia" class="form-control" placeholder="Contoh: R13+, D17+" required />
+                                <select name="ratingUsia" id="ratingUsia" class="form-control" required>
+                                    <option value="SU">SU (Semua Umur)</option>
+                                    <option value="13+">13+</option>
+                                    <option value="17+">17+</option>
+                                    <option value="21+">21+</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Sinopsis</label>
+                                <textarea name="sinopsis" id="sinopsis" class="form-control" rows="3" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label>URL Poster</label>
@@ -183,7 +192,7 @@
                                         <td>${f.durasi} mnt</td>
                                         <td>${f.ratingUsia}</td>
                                         <td>
-                                            <button class="action-btn btn-edit" onclick="editFilm('${f.id}','${f.judul}','${f.genre}','${f.durasi}','${f.ratingUsia}','${f.posterUrl}')">Edit</button>
+                                            <button class="action-btn btn-edit" data-sinopsis="<c:out value='${f.sinopsis}'/>" onclick="editFilm('${f.id}','${f.judul}','${f.genre}','${f.durasi}','${f.ratingUsia}','${f.posterUrl}', this.getAttribute('data-sinopsis'))">Edit</button>
                                             <a class="action-btn btn-delete" href="<%= request.getContextPath() %>/admin?action=deleteFilm&id=${f.id}" onclick="return confirm('Hapus film ini?')">Hapus</a>
                                         </td>
                                     </tr>
@@ -224,7 +233,7 @@
                 document.getElementById('btnCancelJadwal').style.display = 'none';
             }
 
-            function editFilm(id, judul, genre, durasi, rating, poster) {
+            function editFilm(id, judul, genre, durasi, rating, poster, sinopsis) {
                 document.getElementById('formTitleFilm').innerText = 'Edit Film #' + id;
                 document.getElementById('actionFilm').value = 'updateFilm';
                 document.getElementById('filmIdEdit').value = id;
@@ -233,6 +242,7 @@
                 document.getElementById('durasiFilm').value = durasi;
                 document.getElementById('ratingUsia').value = rating;
                 document.getElementById('posterUrl').value = poster;
+                document.getElementById('sinopsis').value = sinopsis;
                 document.getElementById('btnSubmitFilm').innerText = 'Simpan Perubahan';
                 document.getElementById('btnCancelFilm').style.display = 'block';
             }
