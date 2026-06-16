@@ -80,3 +80,13 @@ private static final String PASSWORD = "";
 **Pelanggan:**
 - Username: `pelanggan`
 - Password: `pelanggan123`
+
+## Team Members
+
+| Name | Student ID (NIM) | Feature (PIC) |
+|---|---|---|
+| Sava Arsya Syandana | 103012400043 | Login & Register |
+| Aloysius Axel Adriano | 103012400419 | Katalog Film |
+| Daffa Dzaki Taufiqul Hakim | 103012400107 | Pemilihan Kursi |
+| Ghifari Nurwafi Yoga | 103012400020 | Kategori Tiket Reguler vs Premiere |
+| Muhammad Shaquille Shah Alam Murtopo | 103012400225 | Checkout + Struk Digital |
