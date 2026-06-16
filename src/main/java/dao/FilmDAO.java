@@ -67,4 +67,51 @@ public class FilmDAO {
 
         return null;
     }
+
+    public boolean insert(Film film) {
+        String sql = "INSERT INTO film (judul, genre, durasi, rating_usia, sinopsis, poster_url) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = Dbconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, film.getJudul());
+            ps.setString(2, film.getGenre());
+            ps.setInt(3, film.getDurasi());
+            ps.setString(4, film.getRatingUsia());
+            ps.setString(5, film.getSinopsis());
+            ps.setString(6, film.getPosterUrl());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("[FilmDAO] insert error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean update(Film film) {
+        String sql = "UPDATE film SET judul=?, genre=?, durasi=?, rating_usia=?, sinopsis=?, poster_url=? WHERE id=?";
+        try (Connection conn = Dbconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, film.getJudul());
+            ps.setString(2, film.getGenre());
+            ps.setInt(3, film.getDurasi());
+            ps.setString(4, film.getRatingUsia());
+            ps.setString(5, film.getSinopsis());
+            ps.setString(6, film.getPosterUrl());
+            ps.setInt(7, film.getId());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("[FilmDAO] update error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean delete(int id) {
+        String sql = "DELETE FROM film WHERE id=?";
+        try (Connection conn = Dbconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("[FilmDAO] delete error: " + e.getMessage());
+            return false;
+        }
+    }
 }

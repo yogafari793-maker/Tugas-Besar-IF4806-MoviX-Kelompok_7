@@ -131,4 +131,49 @@ public class JadwalDAO {
             rs.getDouble("harga")
         );
     }
+
+    public boolean insert(int filmId, int studioId, String hari, String jamTayang, double harga) {
+        String sql = "INSERT INTO jadwal_tayang (film_id, studio_id, hari, jam_tayang, harga) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = Dbconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, filmId);
+            ps.setInt(2, studioId);
+            ps.setString(3, hari);
+            ps.setString(4, jamTayang);
+            ps.setDouble(5, harga);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("[JadwalDAO] insert error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean update(int id, int filmId, int studioId, String hari, String jamTayang, double harga) {
+        String sql = "UPDATE jadwal_tayang SET film_id = ?, studio_id = ?, hari = ?, jam_tayang = ?, harga = ? WHERE id = ?";
+        try (Connection conn = Dbconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, filmId);
+            ps.setInt(2, studioId);
+            ps.setString(3, hari);
+            ps.setString(4, jamTayang);
+            ps.setDouble(5, harga);
+            ps.setInt(6, id);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("[JadwalDAO] update error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean delete(int id) {
+        String sql = "DELETE FROM jadwal_tayang WHERE id = ?";
+        try (Connection conn = Dbconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("[JadwalDAO] delete error: " + e.getMessage());
+            return false;
+        }
+    }
 }

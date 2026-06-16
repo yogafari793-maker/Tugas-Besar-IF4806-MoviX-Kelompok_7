@@ -328,9 +328,18 @@
         <main class="main-content">
             <div class="header-actions">
                 <h1 class="page-title">Sedang Tayang</h1>
-                <div class="search-box">
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" class="search-input" placeholder="Cari judul film...">
+                
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <div class="search-box">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" class="search-input" placeholder="Cari judul film...">
+                    </div>
+                    <c:if test="${sessionScope.userRole == 'Admin'}">
+                        <a href="<%= request.getContextPath() %>/admin?action=dashboard" 
+                           style="background: #E51919; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 18px;">\u2699</span> Panel Admin
+                        </a>
+                    </c:if>
                 </div>
             </div>
 
