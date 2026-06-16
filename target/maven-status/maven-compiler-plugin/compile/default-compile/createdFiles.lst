@@ -1,4 +1,10 @@
-servlet\jadwalServlet.class
 model\JadwalTayang.class
 util\Dbconnection.class
 dao\JadwalDAO.class
+model\Studio.class
+model\Tiket.class
+servlet\KatalogServlet.class
+model\Film.class
+model\TiketReguler.class
+servlet\jadwalServlet.class
+dao\FilmDAO.class

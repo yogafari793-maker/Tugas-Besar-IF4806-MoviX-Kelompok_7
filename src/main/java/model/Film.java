@@ -1,5 +1,9 @@
 package model;
 
+/**
+ *
+ * @author AXELL
+ */
 public class Film {
     private int id;
     private String judul;

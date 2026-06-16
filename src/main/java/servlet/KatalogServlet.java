@@ -10,6 +10,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ *
+ * @author AXELL
+ */
 @WebServlet(name = "KatalogServlet", urlPatterns = {"/katalog"})
 public class KatalogServlet extends HttpServlet {
 
