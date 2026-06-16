@@ -38,3 +38,42 @@ Aplikasi kami, MoviX, adalah aplikasi sistem reservasi tiket bioskop berbasis we
 - Database: Relational Database menggunakan MySQL
 - Frontend: HTML5, CSS3 murni bergaya modern, dan Vanilla JavaScript
 - Arsitektur Berorientasi Objek: Mengimplementasikan berbagai prinsip seperti Inheritance dan Polymorphism secara native pada sistem.
+
+## Manual Instalasi Sistem
+
+### Kebutuhan Sistem
+Sebelum menjalankan aplikasi, pastikan perangkat telah terpasang:
+- Java Development Kit (JDK) 17 atau lebih baru
+- Apache Tomcat 10
+- MySQL Server 8.0
+- NetBeans IDE 17 (opsional, untuk pengembangan)
+- Git (opsional)
+
+### Instalasi Database
+1. Jalankan MySQL.
+2. Buat database baru dengan nama `movix`.
+3. Import file `movix_db.sql` ke dalam database tersebut.
+
+### Konfigurasi Database
+Buka file `Dbconnection.java` dan samakan seperti berikut:
+```java
+private static final String URL = "jdbc:mysql://localhost:3306/movix";
+private static final String USERNAME = "root";
+private static final String PASSWORD = "password"; 
+```
+
+### Menjalankan Aplikasi
+1. Buka proyek MoviX pada NetBeans.
+2. Pastikan Apache Tomcat telah terhubung ke NetBeans.
+3. Klik **Clean and Build Project**.
+4. Klik **Run Project**.
+
+### Akun Uji Coba
+
+**Admin:**
+- Username: `admin`
+- Password: `admin123`
+
+**Pelanggan:**
+- Username: `pelanggan`
+- Password: `pelanggan123`
