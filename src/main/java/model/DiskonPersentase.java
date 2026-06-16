@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author DAFFA
+ * @author UPLAND
  */
 public class DiskonPersentase implements Promo {
     private String kodePromo;

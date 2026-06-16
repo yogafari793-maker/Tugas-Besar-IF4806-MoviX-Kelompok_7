@@ -9,13 +9,13 @@ import model.JadwalTayang;      // 3. Tambahkan/pastikan import ini benar
 import java.util.List;          // 4. Pastikan import List ada
 
 import java.io.IOException;
-// Jika Anda menggunakan Tomcat 10+ / GlassFish 6+, gunakan javax.servlet
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession; // Tambahkan import session
+// Jika Anda menggunakan Tomcat 10+ / GlassFish 6+, gunakan jakarta.servlet
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession; // Tambahkan import session
 
 /**
  *
