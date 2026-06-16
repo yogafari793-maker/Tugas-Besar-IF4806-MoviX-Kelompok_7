@@ -20,7 +20,7 @@ public class Dbconnection {
     // =========================================================
     private static final String HOST     = "localhost";
     private static final String PORT     = "3306";
-    private static final String DATABASE = "db_tes";   // Nama database Anda
+    private static final String DATABASE = "movix";   // Nama database Anda
     private static final String USER     = "root";     // User default XAMPP
     private static final String PASSWORD = "";         // Password default XAMPP (Kosong)
 
