@@ -26,7 +26,8 @@ public class FilmDAO {
                     rs.getString("genre"),
                     rs.getInt("durasi"),
                     rs.getString("rating_usia"),
-                    rs.getString("sinopsis")
+                    rs.getString("sinopsis"),
+                    rs.getString("poster_url")
                 ));
             }
         } catch (SQLException e) {
@@ -51,7 +52,8 @@ public class FilmDAO {
                         rs.getString("genre"),
                         rs.getInt("durasi"),
                         rs.getString("rating_usia"),
-                        rs.getString("sinopsis")
+                        rs.getString("sinopsis"),
+                        rs.getString("poster_url")
                     );
                 }
             }

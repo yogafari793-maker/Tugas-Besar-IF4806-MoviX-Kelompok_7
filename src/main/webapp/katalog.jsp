@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -7,437 +8,288 @@
     <title>MoviX - Katalog Film</title>
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #0b0f19;
-            --surface-color: #151a28;
-            --primary-color: #e60000;
-            --primary-hover: #cc0000;
-            --accent-color: #e60000;
-            --text-main: #f0f6fc;
-            --text-muted: #8b949e;
-            --border-color: rgba(255, 255, 255, 0.08);
-            --glass-bg: rgba(21, 26, 40, 0.7);
-            --radius-md: 12px;
-            --radius-lg: 16px;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', Arial, sans-serif;
         }
-
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background: #05070D; /* Warna seragam dengan pilih_tiket */
+            color: white;
+            padding: 20px 30px;
         }
 
-        /* Navbar */
-        .navbar {
+        /* Navbar & Top Bar */
+        .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 3rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1E2530;
         }
-
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #E51919;
             text-decoration: none;
             letter-spacing: 1px;
         }
-
         .navbar-nav {
             display: flex;
             gap: 1.5rem;
+            align-items: center;
         }
-
         .nav-link {
-            color: var(--text-muted);
+            color: #8E97A4;
             text-decoration: none;
             font-weight: 500;
-            padding: 0.5rem 1rem;
+            padding: 8px 16px;
             border-radius: 8px;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
-
         .nav-link:hover {
-            color: var(--text-main);
+            color: white;
             background: rgba(255, 255, 255, 0.05);
         }
-
         .nav-link.active {
-            color: var(--text-main);
+            color: white;
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Layout Container */
+        /* Container Layout */
         .container {
-            display: flex;
-            flex: 1;
-            padding: 2rem 3rem;
-            gap: 2rem;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            width: 100%;
+            display: flex;
+            gap: 25px;
         }
 
         /* Sidebar Filter */
         .sidebar {
-            width: 250px;
-            flex-shrink: 0;
-            background: var(--surface-color);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
+            width: 260px;
+            background: #0B0E14; /* Warna kontainer seragam */
+            border: 1px solid #1E2530;
+            border-radius: 18px;
+            padding: 25px;
             height: fit-content;
         }
-
-        .filter-section {
-            margin-bottom: 1.5rem;
-        }
-
         .filter-title {
-            font-size: 0.9rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        .filter-label {
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
+            color: #8E97A4;
+            margin-bottom: 10px;
             font-weight: 600;
         }
-
         .filter-options {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 8px;
         }
-
         .filter-checkbox {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 10px;
             cursor: pointer;
-            color: var(--text-main);
+            color: #8E97A4;
             font-size: 0.95rem;
+            transition: color 0.2s;
         }
-
-        .filter-checkbox input {
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border: 2px solid var(--text-muted);
-            border-radius: 4px;
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
-        }
-
-        .filter-checkbox input:checked {
-            background: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-
-        .filter-checkbox input:checked::after {
-            content: '\f00c';
-            font-family: 'FontAwesome';
-            position: absolute;
+        .filter-checkbox:hover {
             color: white;
-            font-size: 10px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
-
+        .filter-checkbox input {
+            width: 16px;
+            height: 16px;
+            accent-color: #E51919;
+            cursor: pointer;
+        }
         .btn-reset {
             width: 100%;
-            padding: 0.75rem;
+            padding: 10px;
             background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
+            border: 1px solid #323E4F;
+            color: white;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: 0.3s;
             font-weight: 500;
+            margin-top: 10px;
         }
-
         .btn-reset:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: #1D2432;
         }
 
         /* Main Content */
         .main-content {
             flex: 1;
         }
-
         .header-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 25px;
         }
-
         .page-title {
-            font-size: 1.75rem;
-            font-weight: 700;
+            font-size: 24px;
+            font-weight: bold;
         }
-
-        .search-container {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
         .search-box {
             position: relative;
         }
-
         .search-box i {
             position: absolute;
             left: 12px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
+            color: #8E97A4;
         }
-
         .search-input {
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            background: #0B0E14;
+            border: 1px solid #1E2530;
+            padding: 10px 15px 10px 35px;
             border-radius: 8px;
             color: white;
             width: 250px;
-            transition: border-color 0.3s;
+            transition: 0.3s;
         }
-
         .search-input:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-color: #E51919;
         }
 
-        .btn-add {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.6rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: background 0.3s;
+        /* Grid Film */
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
 
-        .btn-add:hover {
-            background: var(--primary-hover);
-        }
-
-        /* Movie List */
-        .movie-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
+        /* Movie Card (Mengikuti gaya pilih_tiket.jsp) */
         .movie-card {
-            display: flex;
-            background: var(--surface-color);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            gap: 1.5rem;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .movie-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .movie-poster {
-            width: 140px;
-            height: 200px;
-            background: #2a2f42;
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            flex-shrink: 0;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .movie-poster::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
-            opacity: 0.5;
-        }
-
-        .movie-info {
-            flex: 1;
+            background: #0F131D;
+            border: 2px solid #1E2530;
+            border-radius: 20px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-        }
-
-        .movie-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .movie-tags {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tag {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .movie-synopsis {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .movie-footer {
-            margin-top: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--border-color);
-            padding-top: 1rem;
-        }
-
-        .schedules {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-        
-        .schedule-lbl {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-right: 0.5rem;
-        }
-
-        .time-badge {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--primary-color);
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-order {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
+            transition: 0.3s;
             text-decoration: none;
+            color: white;
+        }
+        .movie-card:hover {
+            transform: translateY(-4px);
+            border-color: #E51919;
+            box-shadow: 0 0 20px rgba(229, 25, 25, 0.2);
         }
 
-        .btn-order:hover {
-            background: #e11d48;
+        .poster-wrapper {
+            width: 100%;
+            height: 350px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background: #1D2432; /* Fallback color */
+        }
+        .movie-poster {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .movie-card:hover .movie-poster {
             transform: scale(1.05);
         }
 
-        /* Pagination */
-        .pagination {
+        .movie-info {
             display: flex;
-            justify-content: flex-end;
-            gap: 0.5rem;
-            margin-top: 2rem;
+            flex-direction: column;
+            flex: 1;
         }
-
-        .btn-page {
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 0.5rem 1rem;
+        .movie-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .movie-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .tag {
+            background: #1D2432;
+            border: 1px solid #323E4F;
+            padding: 4px 10px;
             border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
+            font-size: 11px;
+            color: #8E97A4;
+            font-weight: 600;
+        }
+        .tag-age {
+            background: rgba(229, 25, 25, 0.15);
+            color: #E51919;
+            border-color: rgba(229, 25, 25, 0.3);
+        }
+        .movie-desc {
+            color: #8E97A4;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
         }
 
-        .btn-page:hover {
-            background: rgba(255,255,255,0.1);
+        /* Tombol Beli */
+        .btn-buy {
+            display: block;
+            text-align: center;
+            background: #E51919;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: auto;
         }
-        
-        .btn-page:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .btn-buy:hover {
+            background: #cc0000;
         }
 
-        /* Responsive */
         @media (max-width: 900px) {
-            .container {
-                flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
-            }
-            .movie-card {
-                flex-direction: column;
-            }
-            .movie-poster {
-                width: 100%;
-                height: 250px;
-            }
-            .movie-footer {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: flex-start;
-            }
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation -->
-    <nav class="navbar">
-        <a href="index.html" class="navbar-brand" style="color: white; font-size: 1.8rem; font-weight: 800; letter-spacing: 0;">
-            Movi<span style="color: var(--primary-color);">X</span>
-        </a>
+    <!-- Top Bar Mirip pilih_tiket -->
+    <nav class="top-bar">
+        <a href="index.html" class="logo"><span style="color:white;">Movi</span>X</a>
         <div class="navbar-nav">
             <a href="index.html" class="nav-link">Beranda</a>
-            <a href="katalog.jsp" class="nav-link active">Katalog Film</a>
+            <a href="katalog" class="nav-link active">Katalog Film</a>
             <a href="#" class="nav-link">Riwayat</a>
             <a href="login.jsp" class="nav-link"><i class="fa-solid fa-sign-out-alt"></i> Keluar</a>
         </div>
@@ -446,44 +298,26 @@
     <div class="container">
         <!-- Sidebar Filter -->
         <aside class="sidebar">
-            <h2 class="filter-title" style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 1.5rem;">Filter Film</h2>
+            <h2 class="filter-title">Filter Pencarian</h2>
             
             <div class="filter-section">
-                <div class="filter-title">Genre</div>
+                <div class="filter-label">Genre</div>
                 <div class="filter-options">
-                    <label class="filter-checkbox">
-                        <input type="checkbox" checked> Semua Genre
-                    </label>
-                    <label class="filter-checkbox">
-                        <input type="checkbox"> Action
-                    </label>
-                    <label class="filter-checkbox">
-                        <input type="checkbox"> Drama
-                    </label>
-                    <label class="filter-checkbox">
-                        <input type="checkbox"> Horror
-                    </label>
-                    <label class="filter-checkbox">
-                        <input type="checkbox"> Komedi
-                    </label>
+                    <label class="filter-checkbox"><input type="checkbox" checked> Semua Genre</label>
+                    <label class="filter-checkbox"><input type="checkbox"> Action</label>
+                    <label class="filter-checkbox"><input type="checkbox"> Drama</label>
+                    <label class="filter-checkbox"><input type="checkbox"> Horror</label>
+                    <label class="filter-checkbox"><input type="checkbox"> Komedi</label>
                 </div>
             </div>
 
             <div class="filter-section">
-                <div class="filter-title">Rating Usia</div>
+                <div class="filter-label">Rating Usia</div>
                 <div class="filter-options">
-                    <label class="filter-checkbox">
-                        <input type="checkbox" checked> Semua
-                    </label>
-                    <label class="filter-checkbox">
-                        <input type="checkbox"> SU
-                    </label>
-                    <label class="filter-checkbox">
-                        <input type="checkbox"> 13+
-                    </label>
-                    <label class="filter-checkbox">
-                        <input type="checkbox"> 17+
-                    </label>
+                    <label class="filter-checkbox"><input type="checkbox" checked> Semua</label>
+                    <label class="filter-checkbox"><input type="checkbox"> SU</label>
+                    <label class="filter-checkbox"><input type="checkbox"> 13+</label>
+                    <label class="filter-checkbox"><input type="checkbox"> 17+</label>
                 </div>
             </div>
 
@@ -493,110 +327,67 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="header-actions">
-                <h1 class="page-title">Film Sedang Tayang</h1>
-                <div class="search-container">
-                    <div class="search-box">
-                        <i class="fa-solid fa-search"></i>
-                        <input type="text" class="search-input" placeholder="Cari judul film...">
-                    </div>
-                    <!-- Role Admin Only Placeholder -->
-                    <button class="btn-add">
-                        <i class="fa-solid fa-plus"></i> Tambah Film
-                    </button>
+                <h1 class="page-title">Sedang Tayang</h1>
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" class="search-input" placeholder="Cari judul film...">
                 </div>
             </div>
 
-            <div class="movie-list">
-                <!-- Movie Item 1 -->
-                <div class="movie-card">
-                    <div class="movie-poster">
-                        <i class="fa-solid fa-image fa-2x" style="opacity: 0.5;"></i>
-                    </div>
-                    <div class="movie-info">
-                        <h2 class="movie-title">Avengers: Endgame</h2>
-                        <div class="movie-tags">
-                            <span class="tag">Action</span>
-                            <span class="tag">181 min</span>
-                            <span class="tag">13+</span>
+            <!-- Menampilkan Data Dari Database Menggunakan JSTL -->
+            <div class="movie-grid">
+                <c:choose>
+                    <c:when test="${empty daftarFilm}">
+                        <div style="color:#8E97A4; grid-column: 1/-1; text-align:center; padding: 50px;">
+                            <i class="fa-solid fa-film fa-3x" style="margin-bottom: 15px; opacity:0.5;"></i>
+                            <h3>Belum ada film yang tersedia saat ini.</h3>
                         </div>
-                        <p class="movie-synopsis">
-                            Setelah peristiwa menghancurkan di Infinity War, alam semesta hancur. Dengan bantuan sekutu yang tersisa, Avengers berkumpul sekali lagi untuk membalikkan tindakan Thanos dan memulihkan keseimbangan alam semesta.
-                        </p>
-                        <div class="movie-footer">
-                            <div class="schedules">
-                                <span class="schedule-lbl">Jadwal:</span>
-                                <span class="time-badge">10:00</span>
-                                <span class="time-badge">13:30</span>
-                                <span class="time-badge">16:00</span>
-                            </div>
-                            <a href="tiket.jsp" class="btn-order">Pesan Tiket</a>
-                        </div>
-                    </div>
-                </div>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="film" items="${daftarFilm}">
+                            
+                            <div class="movie-card">
+                                <!-- Gambar Poster Asli -->
+                                <div class="poster-wrapper">
+                                    <c:choose>
+                                        <c:when test="${not empty film.posterUrl}">
+                                            <img src="${film.posterUrl}" alt="${film.judul}" class="movie-poster">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <!-- Fallback jika poster tidak ada -->
+                                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#1D2432;">
+                                                <i class="fa-solid fa-image fa-3x" style="color:#323E4F;"></i>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
 
-                <!-- Movie Item 2 -->
-                <div class="movie-card">
-                    <div class="movie-poster">
-                        <i class="fa-solid fa-image fa-2x" style="opacity: 0.5;"></i>
-                    </div>
-                    <div class="movie-info">
-                        <h2 class="movie-title">The Conjuring 3</h2>
-                        <div class="movie-tags">
-                            <span class="tag">Horror</span>
-                            <span class="tag">112 min</span>
-                            <span class="tag">17+</span>
-                        </div>
-                        <p class="movie-synopsis">
-                            Kisah mengerikan tentang teror, pembunuhan, dan kejahatan tak dikenal yang mengejutkan bahkan penyelidik paranormal yang berpengalaman di kehidupan nyata Ed dan Lorraine Warren.
-                        </p>
-                        <div class="movie-footer">
-                            <div class="schedules">
-                                <span class="schedule-lbl">Jadwal:</span>
-                                <span class="time-badge">19:00</span>
-                                <span class="time-badge">21:30</span>
+                                <!-- Info Film -->
+                                <div class="movie-info">
+                                    <h2 class="movie-title">${film.judul}</h2>
+                                    
+                                    <div class="movie-tags">
+                                        <span class="tag">${film.genre}</span>
+                                        <span class="tag">${film.durasi} Menit</span>
+                                        <span class="tag tag-age">${film.ratingUsia}</span>
+                                    </div>
+                                    
+                                    <p class="movie-desc">
+                                        ${film.sinopsis}
+                                    </p>
+                                    
+                                    <!-- Menghubungkan Katalog dengan Halaman Tiket Milik Ghifari -->
+                                    <a href="${pageContext.request.contextPath}/jadwal?filmId=${film.id}" class="btn-buy">
+                                        Pilih Jadwal & Tiket
+                                    </a>
+                                </div>
                             </div>
-                            <a href="tiket.jsp" class="btn-order">Pesan Tiket</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Movie Item 3 -->
-                <div class="movie-card">
-                    <div class="movie-poster">
-                        <i class="fa-solid fa-image fa-2x" style="opacity: 0.5;"></i>
-                    </div>
-                    <div class="movie-info">
-                        <h2 class="movie-title">Dua Garis Biru</h2>
-                        <div class="movie-tags">
-                            <span class="tag">Drama</span>
-                            <span class="tag">113 min</span>
-                            <span class="tag">13+</span>
-                        </div>
-                        <p class="movie-synopsis">
-                            Bima dan Dara adalah sepasang kekasih yang masih duduk di bangku SMA. Kehidupan mereka berubah drastis ketika mereka melanggar batas tanpa mengetahui konsekuensinya.
-                        </p>
-                        <div class="movie-footer">
-                            <div class="schedules">
-                                <span class="schedule-lbl">Jadwal:</span>
-                                <span class="time-badge">11:00</span>
-                                <span class="time-badge">14:30</span>
-                            </div>
-                            <a href="tiket.jsp" class="btn-order">Pesan Tiket</a>
-                        </div>
-                    </div>
-                </div>
+                            
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </div>
             
-            <div style="margin-top: 1rem;">
-                <button class="btn-add" style="background: transparent; border: 1px dashed var(--primary-color); color: var(--primary-color); width: 100%; justify-content: center;">
-                    <i class="fa-solid fa-plus"></i> Tambah Jadwal Tayang (Khusus Admin)
-                </button>
-            </div>
-
-            <div class="pagination">
-                <button class="btn-page" disabled>← Prev</button>
-                <button class="btn-page">Next →</button>
-            </div>
         </main>
     </div>
 
