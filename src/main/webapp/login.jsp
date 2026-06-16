@@ -19,7 +19,7 @@
             background-color: #141414;
         }
 
-        .login-box{
+        .register-box{
             margin-top: 80px;
         }
 
