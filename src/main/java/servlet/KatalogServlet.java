@@ -1,0 +1,36 @@
+package servlet;
+
+import dao.FilmDAO;
+import model.Film;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
+
+@WebServlet(name = "KatalogServlet", urlPatterns = {"/katalog"})
+public class KatalogServlet extends HttpServlet {
+
+    private FilmDAO filmDAO;
+
+    @Override
+    public void init() {
+        filmDAO = new FilmDAO();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        // Mengambil semua data film dari database
+        List<Film> daftarFilm = filmDAO.getAllFilms();
+        
+        // Menyimpan data film ke dalam request scope agar bisa dibaca oleh JSP
+        request.setAttribute("daftarFilm", daftarFilm);
+        
+        // Meneruskan request ke halaman katalog.jsp
+        request.getRequestDispatcher("/katalog.jsp").forward(request, response);
+    }
+}
