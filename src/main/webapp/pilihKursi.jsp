@@ -547,10 +547,8 @@
         </div>
 
         <script>
-        // Harga diambil dinamis dari Servlet
             const TICKET_PRICE = parseInt("${ticketPrice}", 10) || 0;
 
-        // Baris & Kolom diambil secara dinamis dari request/session attribute
             const ROWS = (function () {
                 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 const r = [];
@@ -562,7 +560,6 @@
 
             const COLS = parseInt("${seatCols}", 10) || 10;
 
-        // Data kursi terisi disederhanakan menjadi Array biasa
             const TAKEN = [${takenSeatsFormatted}];
 
             const MAX = 6;
@@ -679,7 +676,6 @@
             function updateUI() {
                 const arr = [...chosen].sort();
                 const count = arr.length;
-                // Harga dihitung langsung dengan harga tiket dari backend
                 const total = TICKET_PRICE * count;
 
                 const dispSeats = document.getElementById('dispSeats');

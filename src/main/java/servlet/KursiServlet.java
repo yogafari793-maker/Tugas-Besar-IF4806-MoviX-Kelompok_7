@@ -44,7 +44,6 @@ public class KursiServlet extends HttpServlet {
             request.setAttribute("studioName", jadwal.getNamaStudio());
             request.setAttribute("ticketPrice", (int) jadwal.getHarga());
             
-            // Format format: "'A1', 'C4'"
             dao.TransaksiDAO transaksiDAO = new dao.TransaksiDAO();
             java.util.List<String> takenSeats = transaksiDAO.getKursiDipilihByJadwal(jadwal.getId());
             StringBuilder takenSeatsFormatted = new StringBuilder();
@@ -56,7 +55,6 @@ public class KursiServlet extends HttpServlet {
             }
             request.setAttribute("takenSeatsFormatted", takenSeatsFormatted.toString()); 
             
-            // Adjust rows/cols based on studio type roughly
             if (jadwal.getNamaStudio().toLowerCase().contains("premier")) {
                 request.setAttribute("seatRows", 6);
                 request.setAttribute("seatCols", 8);
