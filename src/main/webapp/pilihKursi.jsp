@@ -475,13 +475,8 @@
     </head>
     <body>
 
-        <nav>
+        <nav class="navbar">
             <div class="nav-logo">Movi<span>X</span></div>
-            <div class="nav-links">
-                <a href="#">Beranda</a>
-                <a href="#">Film</a>
-                <a href="#">Promo</a>
-            </div>
         </nav>
 
         <div class="film-banner">
