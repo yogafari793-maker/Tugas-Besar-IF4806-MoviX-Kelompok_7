@@ -1,3 +1,8 @@
+<%-- 
+    Document   : katalog
+    Created on : Jun 16, 2026, 9:58:05 AM
+    Author     : AXELL
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
