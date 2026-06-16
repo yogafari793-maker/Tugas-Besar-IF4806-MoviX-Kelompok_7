@@ -6,8 +6,16 @@ package model;
 
 /**
  *
- * @author UPLAND
+ * @author DAFFA
  */
-public class Admin {
-    
+public class Admin extends Pengguna {
+
+    public Admin(String username, String password, String nama) {
+        super(username, password, nama);
+    }
+
+    @Override
+    public String getRole() {
+        return "Admin";
+    }
 }

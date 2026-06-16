@@ -8,6 +8,7 @@ package model;
  *
  * @author ghifa
  */
+import java.util.ArrayList;
 public class JadwalTayang {
 
     // =========================================================
@@ -22,6 +23,7 @@ public class JadwalTayang {
     private String hari;
     private String jamTayang;
     private double harga;
+    private ArrayList<JadwalTayang> daftarJadwal;
 
     // =========================================================
     // CONSTRUCTOR KOSONG
@@ -102,5 +104,9 @@ public class JadwalTayang {
                 + ", jam='" + jamTayang + '\''
                 + ", harga=" + harga
                 + '}';
+    }
+    
+    public void tambahJadwal(JadwalTayang j) {
+        daftarJadwal.add(j);
     }
 }

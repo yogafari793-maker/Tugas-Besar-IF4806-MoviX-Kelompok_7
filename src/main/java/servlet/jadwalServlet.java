@@ -35,7 +35,7 @@ public class jadwalServlet extends HttpServlet {
 
         // VALIDASI: Jika tidak membawa ID Film, balikkan paksa ke index katalog film utama
         if (filmIdParam == null || filmIdParam.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            response.sendRedirect(request.getContextPath() + "/index.html");
             return;
         }
 
@@ -51,10 +51,10 @@ public class jadwalServlet extends HttpServlet {
                     request.setAttribute("namaFilm", infoFilm.getNamaFilm());
                     request.getRequestDispatcher("/WEB-INF/pilih_tiket.jsp").forward(request, response);
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/index.jsp");
+                    response.sendRedirect(request.getContextPath() + "/index.html");
                 }
             } catch (Exception e) {
-                response.sendRedirect(request.getContextPath() + "/index.jsp");
+                response.sendRedirect(request.getContextPath() + "/index.html");
             }
             return;
         }
@@ -96,7 +96,7 @@ public class jadwalServlet extends HttpServlet {
         if (tipeParam == null || tipeParam.isEmpty()) { tipeParam = "reguler"; }
 
         if (jadwalIdParam == null || jadwalIdParam.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            response.sendRedirect(request.getContextPath() + "/index.html");
             return;
         }
 
@@ -105,7 +105,7 @@ public class jadwalServlet extends HttpServlet {
             JadwalTayang jadwal = jadwalDAO.getById(jadwalId);
 
             if (jadwal == null) {
-                response.sendRedirect(request.getContextPath() + "/index.jsp");
+                response.sendRedirect(request.getContextPath() + "/index.html");
                 return;
             }
 
@@ -114,7 +114,7 @@ public class jadwalServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/kursi?jadwalId=" + jadwalId);
 
         } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            response.sendRedirect(request.getContextPath() + "/index.html");
         }
     }
 }
