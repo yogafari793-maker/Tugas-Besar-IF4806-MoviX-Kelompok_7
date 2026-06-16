@@ -14,6 +14,7 @@ model\TiketPremiere.class
 model\JadwalTayang.class
 dao\JadwalDAO.class
 dao\UserDAO.class
+servlet\AdminServlet.class
 dao\FilmDAO.class
 servlet\AuthServlet.class
 model\Admin.class

@@ -54,7 +54,7 @@ public class AuthServlet extends HttpServlet {
                 session.setAttribute("userRole", user.getRole());
                 
                 if (user.getRole().equalsIgnoreCase("Admin")) {
-                    response.sendRedirect(request.getContextPath() + "/loginadmin.jsp");
+                    response.sendRedirect(request.getContextPath() + "/katalog");
                 } else {
                     response.sendRedirect(request.getContextPath() + "/katalog");
                 }
