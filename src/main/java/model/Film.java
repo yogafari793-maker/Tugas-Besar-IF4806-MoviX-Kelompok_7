@@ -7,16 +7,18 @@ public class Film {
     private int durasi;
     private String ratingUsia;
     private String sinopsis;
+    private String posterUrl;
 
     public Film() {}
 
-    public Film(int id, String judul, String genre, int durasi, String ratingUsia, String sinopsis) {
+    public Film(int id, String judul, String genre, int durasi, String ratingUsia, String sinopsis, String posterUrl) {
         this.id = id;
         this.judul = judul;
         this.genre = genre;
         this.durasi = durasi;
         this.ratingUsia = ratingUsia;
         this.sinopsis = sinopsis;
+        this.posterUrl = posterUrl;
     }
 
     public int getId() { return id; }
@@ -36,4 +38,7 @@ public class Film {
 
     public String getSinopsis() { return sinopsis; }
     public void setSinopsis(String sinopsis) { this.sinopsis = sinopsis; }
+
+    public String getPosterUrl() { return posterUrl; }
+    public void setPosterUrl(String posterUrl) { this.posterUrl = posterUrl; }
 }
