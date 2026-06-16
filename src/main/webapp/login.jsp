@@ -58,11 +58,20 @@
 
                         <p class="text-muted">
                             Login
-                            <a href="loginadmin.jsp"class="text-decoration-none">
-                            admin?
-
-                        </a>
+                            <a href="loginadmin.jsp" class="text-decoration-none text-danger">admin?</a>
                         </p>
+                    </div>
+
+                    <% if (request.getAttribute("errorMessage") != null) { %>
+                        <div class="alert alert-danger text-center" role="alert">
+                            <%= request.getAttribute("errorMessage") %>
+                        </div>
+                    <% } %>
+                    <% if (request.getAttribute("successMessage") != null) { %>
+                        <div class="alert alert-success text-center" role="alert">
+                            <%= request.getAttribute("successMessage") %>
+                        </div>
+                    <% } %>
 
                     <form action="login" method="POST">
 
