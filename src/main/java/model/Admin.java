@@ -10,8 +10,8 @@ package model;
  */
 public class Admin extends Pengguna {
 
-    public Admin(String username, String password, String nama) {
-        super(username, password, nama);
+    public Admin(int id, String username, String password, String nama) {
+        super(id, username, password, nama);
     }
 
     @Override

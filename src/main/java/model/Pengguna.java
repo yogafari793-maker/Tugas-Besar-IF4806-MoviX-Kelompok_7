@@ -10,15 +10,20 @@ package model;
  */
 
 public abstract class Pengguna {
+    private int id;
     private String username;
     private String password;
     private String nama;
 
-    public Pengguna(String username, String password, String nama) {
+    public Pengguna(int id, String username, String password, String nama) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.nama = nama;
     }
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }

@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class Pelanggan extends Pengguna {
     private ArrayList<Transaksi> riwayatTransaksi;
 
-    public Pelanggan(String username, String password, String nama) {
-        super(username, password, nama);
+    public Pelanggan(int id, String username, String password, String nama) {
+        super(id, username, password, nama);
         this.riwayatTransaksi = new ArrayList<>();
     }
 
