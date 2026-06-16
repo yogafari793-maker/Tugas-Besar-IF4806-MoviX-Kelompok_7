@@ -67,6 +67,7 @@ private static final String PASSWORD = "password";
 2. Pastikan Apache Tomcat telah terhubung ke NetBeans.
 3. Klik **Clean and Build Project**.
 4. Klik **Run Project**.
+5. Buka tautan URL aplikasi Anda di *browser*: `http://localhost:8080/MoviX/`
 
 ### Akun Uji Coba
 
