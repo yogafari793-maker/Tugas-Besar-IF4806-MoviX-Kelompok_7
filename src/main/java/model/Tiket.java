@@ -39,7 +39,6 @@ public abstract class Tiket {
         return jadwal;
     }
 
-
     public abstract double hitungHarga();
 
     @Override
