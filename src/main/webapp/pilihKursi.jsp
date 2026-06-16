@@ -501,7 +501,8 @@
                 <div class="screen-label">Layar</div>
             </div>
 
-            <form id="seatForm" method="POST" action="konfirmasi.jsp">
+            <form id="seatForm" method="POST" action="${pageContext.request.contextPath}/checkout">
+                <input type="hidden" name="aksi" value="review">
                 <input type="hidden" name="film"   value="${filmTitle}">
                 <input type="hidden" name="date"   value="${filmDate}">
                 <input type="hidden" name="time"   value="${filmTime}">

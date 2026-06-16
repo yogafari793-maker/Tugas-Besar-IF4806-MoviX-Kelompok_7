@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"
-        import="java.util.List, test.model.JadwalTayang"%>
+        import="java.util.List, model.JadwalTayang"%>
 <!DOCTYPE html>
 <html>
     <head>

@@ -339,6 +339,10 @@
                            style="background: #E51919; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 8px;">
                             <span style="font-size: 18px;">\u2699</span> Panel Admin
                         </a>
+                        <a href="<%= request.getContextPath() %>/transaksiAdmin.jsp" 
+                           style="background: #E51919; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 8px; margin-left: 10px;">
+                            <span style="font-size: 18px;">\ud83d\udcc3</span> Riwayat Transaksi
+                        </a>
                     </c:if>
                 </div>
             </div>

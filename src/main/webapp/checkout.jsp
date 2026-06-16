@@ -1,334 +1,239 @@
-<%-- 
-    Document   : checkout
-    Created on : 22 May 2026, 15.38.21
-    Author     : Hp
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>MoviX - Checkout</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — MoviX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg:        #0d0f14;
+            --surface:   #151820;
+            --surface2:  #1c2030;
+            --border:    rgba(255,255,255,.07);
+            --text:      #e8eaf0;
+            --muted:     #6b7280;
+            --accent:    #e50914;
+            --accent2:   #ff3d3d;
+            --radius:    12px;
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
         body {
-            background-color: #0b0d12;
-            font-family: "Times New Roman", Times, serif;
-            color: #ffffff;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 15px;
+            min-height: 100vh;
+            line-height: 1.5;
         }
-        
-        .main-container {
-            margin: 20px auto;
-            width: 95%;
-            min-height: 90vh;
-            background: #11141a;
-            border: 1px solid #1f242e;
-            border-radius: 20px;
-            overflow: hidden;
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(13,15,20,.85); backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 32px; height: 60px;
+            display: flex; align-items: center; justify-content: space-between;
         }
-        
-        .navbar-custom {
-            background-color: #161a23;
-            padding: 15px 25px;
-            border-bottom: 1px solid #1f242e;
+        .nav-logo { font-family: var(--font-head); font-size: 22px; font-weight: 800; color: var(--text); }
+        .nav-logo span { color: var(--accent); }
+        .nav-links a {
+            color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500;
+            margin-left: 20px; transition: color .2s;
         }
-        
-        .logo-title {
-            color: #dc3545;
-            font-weight: bold;
-            font-size: 30px;
-            margin: 0;
-        }
-        
-        .btn-nav-custom {
-            background-color: #1c212c;
-            color: #b2bac7;
-            border: 1px solid #2d3646;
-            transition: 0.2s;
-        }
-        
-        .btn-nav-custom:hover {
-            color: #ffffff;
-            background-color: #232a35;
-            border-color: #3f4a5f;
-        }
-        
-        .left-panel {
-            padding: 30px;
-        }
-        
-        .summary-box {
-            background-color: #181c24;
-            border: 1px solid #232a35;
-            border-radius: 12px;
-            padding: 20px;
-        }
-        
-        .calculation {
-            background-color: #181c24;
-            border: 1px solid #232a35;
-            border-radius: 12px;
-            padding: 20px;
-        }
-        
-        .text-muted-custom {
-            color: #6c757d;
-        }
-        
-        .form-control-dark {
-            background-color: #1c212c !important;
-            border: 1px solid #2d3646 !important;
-            color: #ffffff !important;
-        }
-        
-        .form-control-dark::placeholder {
-            color: #495469;
-        }
-        
-        .btn-dark-custom {
-            background-color: #2a313f;
-            color: white;
-            border: 1px solid #364052;
-            transition: 0.2s;
-        }
-        
-        .btn-dark-custom:hover {
-            background-color: #364052;
-            color: white;
-        }
-        
-        .btn-confirm {
-            background-color: #dc3545;
-            color: white;
-            font-weight: bold;
-            padding: 14px;
-            border-radius: 8px;
-            width: 100%;
-            border: none;
-            transition: 0.2s;
-            box-shadow: 0 4px 15px #000000;
-        }
-        
-        .btn-confirm:hover {
-            background-color: #bd2130;
-            color: white;
-            box-shadow: 0 4px 20px #000000;
-        }
-        
-        .right-panel {
-            background-color: #141820;
-            border-left: 1px solid #1f242e;
-            padding: 30px;
-        }
+        .nav-links a:hover { color: var(--text); }
 
-        .receipt-card {
-            border: 1px dashed #3a4454;
-            border-radius: 15px;
-            padding: 25px;
-            background-color: #181c24;
+        main { max-width: 1000px; margin: 0 auto; padding: 40px 20px; display: flex; gap: 40px; align-items: flex-start; }
+        
+        .left-col { flex: 1; }
+        .right-col { width: 380px; position: sticky; top: 90px; }
+
+        .section-title { font-family: var(--font-head); font-size: 24px; font-weight: 700; margin-bottom: 20px; }
+
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; }
+        
+        .row-info { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .row-info:last-child { border-bottom: none; }
+        .row-info .label { color: var(--muted); font-size: 14px; }
+        .row-info .val { font-weight: 500; text-align: right; max-width: 60%; }
+        
+        .seats-badge { display: inline-block; background: var(--surface2); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; color: var(--accent); margin-left: 5px; margin-bottom: 5px; }
+
+        .form-group { display: flex; gap: 10px; margin-bottom: 10px; }
+        .form-control { flex: 1; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 12px 16px; border-radius: 8px; font-family: var(--font-body); font-size: 14px; outline: none; transition: border .2s; }
+        .form-control:focus { border-color: var(--accent); }
+        .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all .2s; }
+        .btn-secondary:hover { background: var(--surface2); }
+        
+        .text-green { color: #22c55e !important; }
+        
+        .total-row { padding-top: 16px !important; margin-top: 8px; border-top: 2px dashed var(--border) !important; }
+        .total-row .label { font-size: 16px; font-weight: 600; color: var(--text); }
+        .total-row .val { font-family: var(--font-head); font-size: 22px; font-weight: 700; color: var(--accent); }
+
+        .btn-primary { width: 100%; background: var(--accent); color: #fff; padding: 16px; border: none; border-radius: 10px; font-family: var(--font-head); font-size: 16px; font-weight: 700; cursor: pointer; transition: all .2s; box-shadow: 0 4px 20px rgba(229,9,20,.35); margin-top: 10px; }
+        .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(229,9,20,.5); }
+
+        .receipt-container { background: #0b0d12; border: 1px dashed #3a4454; border-radius: 15px; padding: 25px; position: relative; }
+        .receipt-container::before, .receipt-container::after { content: ''; position: absolute; width: 24px; height: 24px; background: var(--bg); border-radius: 50%; top: 60px; border: 1px dashed #3a4454; }
+        .receipt-container::before { left: -12px; border-right-color: transparent; border-top-color: transparent; border-bottom-color: transparent; transform: rotate(45deg); }
+        .receipt-container::after { right: -12px; border-left-color: transparent; border-top-color: transparent; border-bottom-color: transparent; transform: rotate(-45deg); }
+        
+        .receipt-header { text-align: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed #3a4454; }
+        .receipt-header h4 { font-family: var(--font-head); font-weight: 800; color: var(--accent); font-size: 20px; margin-bottom: 4px; }
+        .receipt-header p { font-size: 12px; color: var(--muted); }
+
+        .qr-box { background: var(--surface2); height: 180px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; color: var(--muted); margin-top: 20px; border: 1px solid var(--border); }
+        .qr-box span { font-size: 12px; margin-top: 10px; opacity: 0.7; }
+
+        @media (max-width: 800px) {
+            main { flex-direction: column; }
+            .right-col { width: 100%; position: static; }
         }
         
-        .qr-placeholder {
-            border: 1px dashed #3a4454;
-            border-radius: 8px;
-            height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #11141a;
-            color: #6c757d;
-        }
-
-        .table-checkout {
-            width: 100%;
-            border-collapse: collapse;
-            background: transparent;
-        }
-
-        .table-checkout td {
-            padding: 10px 0;
-            color: #ffffff;
-            background: transparent !important;
-            border: none;
-        }
-
-        .table-checkout tr {
-            border-bottom: 1px solid #2d3646;
-        }
-
-        .table-checkout tr:last-child {
-            border-bottom: none;
-        }
-
-        .tr-line-dashed {
-            border-bottom: 1px dashed #3a4454 !important;
-        }
-
-        input, button, select, textarea, p, div, h3, h5, td, small, a {
-            font-family: "Times New Roman", Times, serif !important;
-        }
+        .alert { padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; }
+        .alert-error { background: rgba(229,9,20,.1); border: 1px solid rgba(229,9,20,.3); color: #ffcccc; }
+        .alert-success { background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.3); color: #bbf7d0; }
     </style>
 </head>
 <body>
 
-<div class="main-container">
+<nav>
+    <div class="nav-logo">Movi<span>X</span></div>
+    <div class="nav-links">
+        <a href="${pageContext.request.contextPath}/katalog">Kembali ke Katalog</a>
+    </div>
+</nav>
 
-    <nav class="navbar navbar-custom d-flex justify-content-between align-items-center">
-        <h5 class="logo-title">■ MoviX</h5>
-        <div>
-            <a href="logout.jsp" class="btn btn-nav-custom btn-sm me-1">Keluar</a>
-            <a href="riwayat.jsp" class="btn btn-nav-custom btn-sm me-1">Riwayat Transaksi</a>
-            <a href="pilihKursi.jsp" class="btn btn-nav-custom btn-sm">Kembali</a>
+<main>
+    <div class="left-col">
+        <h1 class="section-title">Detail Pesanan</h1>
+        
+        <% 
+            String errorMsg = (String) session.getAttribute("errorPromo");
+            String successMsg = (String) session.getAttribute("successPromo");
+            if (errorMsg != null) { 
+        %>
+            <div class="alert alert-error"><%= errorMsg %></div>
+        <% 
+                session.removeAttribute("errorPromo");
+            } 
+            if (successMsg != null) {
+        %>
+            <div class="alert alert-success"><%= successMsg %></div>
+        <% 
+                session.removeAttribute("successPromo");
+            } 
+        %>
+
+        <div class="card">
+            <div class="row-info">
+                <span class="label">Film</span>
+                <span class="val">${sessionScope.filmTitle}</span>
+            </div>
+            <div class="row-info">
+                <span class="label">Jadwal</span>
+                <span class="val">${sessionScope.filmDate}, ${sessionScope.filmTime}</span>
+            </div>
+            <div class="row-info">
+                <span class="label">Studio</span>
+                <span class="val">${sessionScope.studioName}</span>
+            </div>
+            <div class="row-info" style="align-items: center; padding: 16px 0;">
+                <span class="label">Kursi</span>
+                <div style="text-align: right; max-width: 60%;">
+                    <% 
+                        String[] seats = (String[]) session.getAttribute("selectedSeats");
+                        if (seats != null) {
+                            for (String s : seats) {
+                    %>
+                        <span class="seats-badge"><%= s %></span>
+                    <%      }
+                        }
+                    %>
+                </div>
+            </div>
         </div>
-    </nav>
 
-    <div class="container-fluid p-0">
-        <div class="row g-0">
-            
-            <div class="col-md-7 left-panel">
-                <h3 class="fw-bold mb-4">Pesanan</h3>
-                
-                <div class="summary-box mb-4">
-                    <table class="table-checkout">
-                        <tr>
-                            <td class="text-white" style="width: 30%">Film</td>
-                            <td class="text-end fw-bold">Judul Film</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 30%">Jadwal</td>
-                            <td class="text-end fw-bold">Hari, Tanggal</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 30%">Studio</td>
-                            <td class="text-end fw-bold">Nama Studio</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 30%">Kursi</td>
-                            <td class="text-end fw-bold text-danger">Kode Kursi</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 30%">Jenis Tiket</td>
-                            <td class="text-end fw-bold">Jenis Tiket</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold">0x Tiket</td>
-                            <td class="text-end fw-bold fs-5">Rp 0</td>
-                        </tr>
-                    </table>
+        <h2 class="section-title" style="font-size: 18px;">Kode Promo</h2>
+        <div class="card">
+            <form action="${pageContext.request.contextPath}/checkout" method="POST">
+                <input type="hidden" name="aksi" value="terapkanPromo">
+                <div class="form-group">
+                    <input type="text" name="kodePromo" class="form-control" placeholder="Masukkan kode promo..." value="${sessionScope.kodePromo != null ? sessionScope.kodePromo : ''}">
+                    <button type="submit" class="btn-secondary">Gunakan</button>
                 </div>
-                
-                <h5 class="fw-bold mb-3">Kode Promo</h5>
-                <form action="CheckoutServlet" method="POST" class="mb-4">
-                    <input type="hidden" name="aksi" value="terapkanPromo">
-                    <div class="input-group">
-                        <input type="text" name="kodePromo" class="form-control form-control-dark text-uppercase" placeholder="Masukkan kode promo...">
-                        <button type="submit" class="btn btn-dark-custom px-4">Masukkan</button>
-                    </div>
-                    <small class="text-muted-custom d-block mt-1">Masukkan kode promo</small>
-                </form>
-                
-                <div class="calculation mb-4">
-                    <h5 class="fw-bold mb-4">Total Harga</h5>
-                    <table class="table-checkout">
-                        <tr>
-                            <td class="text-white" style="width: 30%">Total Tiket</td>
-                            <td class="text-end fw-bold fs-5">Tidak Ada</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 30%">Total Tiket</td>
-                            <td class="text-end fw-bold fs-5">Tidak Ada</td>
-                        </tr>
-                        <tr>
-                            <td class="text-success">Diskon</td>
-                            <td class="text-end text-success">Tidak Ada</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 30%">Biaya layanan</td>
-                            <td class="text-end">Tidak Ada</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold fs-5">Total Bayar</td>
-                            <td class="text-end fw-bold fs-4">Tidak Ada</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <form action="CheckoutServlet" method="post" class="mb-3">
-                    <input type="hidden" name="aksi" value="bayarDanCetak">
-                    <button type="submit" class="btn btn-confirm text-uppercase">Konfirmasi Pembayaran</button>
-                </form>
-                
-                <div class="text-center">
-                    <a href="riwayatAdmin.jsp" class="text-muted-custom small text-decoration-none">Lihat Riwayat Transaksi (Admin)</a>
-                </div>
+                <% if (sessionScope.kodePromo != null) { %>
+                    <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">
+                        Promo aktif: <strong>${sessionScope.promoDeskripsi}</strong> 
+                        (<a href="${pageContext.request.contextPath}/checkout?aksi=hapusPromo" style="color: var(--accent); text-decoration: none;">Hapus</a>)
+                    </p>
+                <% } %>
+            </form>
+        </div>
+        
+        <form action="${pageContext.request.contextPath}/checkout" method="POST" id="formBayar">
+            <input type="hidden" name="aksi" value="bayarDanCetak">
+            <button type="submit" class="btn-primary" ${sessionScope.bayarSukses != null ? 'style="display:none;"' : ''}>Konfirmasi Pembayaran</button>
+        </form>
+        
+        <% if (sessionScope.bayarSukses != null) { %>
+            <div class="alert alert-success" style="text-align: center; margin-top: 20px;">
+                <strong>Pembayaran Berhasil!</strong><br>
+                Pesanan tiket Anda telah terkonfirmasi. Silakan simpan Struk Digital Anda.
             </div>
+        <% } %>
+    </div>
 
-            <div class="col-md-5 right-panel">
-                <h3 class="fw-bold mb-4">Struk Digital</h3>
-                
-                <div class="receipt-card">
-                    <div class="text-center mb-4">
-                        <h4 class="fw-bold m-0 text-danger">■ MoviX</h4>
-                        <small class="text-muted-custom small">Bukti Pemesanan Tiket</small>
-                    </div>
-
-                    <table class="table-checkout">
-                        <tr>
-                            <td class="text-white" style="width: 40%">Kode Booking</td>
-                            <td class="text-end fw-bold text-uppercase">Tidak Ada</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 40%">Film</td>
-                            <td class="text-end">Judul Film</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 40%">Tanggal</td>
-                            <td class="text-end">Hari, Tanggal</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 40%">Jam</td>
-                            <td class="text-end">Jam WIB</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 40%">Studio</td>
-                            <td class="text-end">Nama Studio</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 40%">Kursi</td>
-                            <td class="text-end fw-bold text-danger">-</td>
-                        </tr>
-                        <tr class="tr-line-dashed">
-                            <td class="text-white" style="width: 40%">Jenis Tiket</td>
-                            <td class="text-end">Tidak Ada</td>
-                        </tr>
-                        <tr>
-                            <td class="text-white" style="width: 40%">Subtotal</td>
-                            <td class="text-end">Tidak Ada</td>
-                        </tr>
-                        <tr class="tr-line-dashed">
-                            <td class="text-success">Diskon</td>
-                            <td class="text-end text-success">Tidak Ada</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold">Total</td>
-                            <td class="text-end fw-bold fs-5">Tidak Ada</td>
-                        </tr>
-                    </table>
-
-                    <div class="qr-placeholder text-center mt-4">
-                        <h5 class="fw-bold mb-1">QR / Barcode Tiket</h5>
-                        <p class="m-0 opacity-75 small text-muted-custom">Tunjukkan struk ini kepada petugas bioskop</p>
-                    </div>
-                </div>
+    <div class="right-col">
+        <div class="receipt-container">
+            <div class="receipt-header">
+                <h4>Movi<span>X</span></h4>
+                <p>E-Ticket Resmi</p>
             </div>
             
+            <div class="row-info">
+                <span class="label">Kode Booking</span>
+                <span class="val" style="color: var(--text); font-family: monospace; font-size: 16px;">
+                    ${sessionScope.kodeBooking != null ? sessionScope.kodeBooking : 'MENUNGGU PEMBAYARAN'}
+                </span>
+            </div>
+            
+            <div class="row-info">
+                <span class="label">Harga Tiket (${sessionScope.jumlahKursi}x)</span>
+                <span class="val">Rp ${sessionScope.subtotalFormatted}</span>
+            </div>
+            
+            <% if (sessionScope.diskon > 0) { %>
+            <div class="row-info">
+                <span class="label">Diskon Promo</span>
+                <span class="val text-green">- Rp ${sessionScope.diskonFormatted}</span>
+            </div>
+            <% } %>
+            
+            <div class="row-info">
+                <span class="label">Biaya Layanan</span>
+                <span class="val">Rp 4.000</span>
+            </div>
+            
+            <div class="row-info total-row">
+                <span class="label">Total Bayar</span>
+                <span class="val">Rp ${sessionScope.totalAkhirFormatted}</span>
+            </div>
+
+            <div class="qr-box">
+                <% if (sessionScope.bayarSukses != null) { %>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${sessionScope.kodeBooking}&bgcolor=1c2030&color=e8eaf0" alt="QR Code" width="120" height="120" style="border-radius: 8px;">
+                    <span>Scan at the gate</span>
+                <% } else { %>
+                    <div style="width: 80px; height: 80px; border: 2px dashed var(--muted); border-radius: 8px; opacity: 0.5;"></div>
+                    <span>Selesaikan pembayaran</span>
+                <% } %>
+            </div>
         </div>
     </div>
-</div>
+</main>
 
 </body>
 </html>
