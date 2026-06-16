@@ -34,9 +34,15 @@
         }
 
         .logo { 
+            font-family: 'Inter', Arial, sans-serif;
             font-size:30px;
-            font-weight:bold; 
-            color:#E51919; 
+            font-weight:800; 
+            letter-spacing: -0.5px;
+            color: white; 
+            text-decoration: none;
+        }
+        .logo span {
+            color: #E51919;
         }
 
         .text-muted {
@@ -92,7 +98,7 @@
 
                     <div class="text-center mb-4">
 
-                        <h1 class="logo"><span style="color:white;">Movi</span>X</h1>
+                        <h1 class="logo">Movi<span>X</span></h1>
 
                         <p class="text-muted">
                             Buat akun baru

@@ -35,11 +35,15 @@
             border-bottom: 1px solid #1E2530;
         }
         .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #E51919;
+            font-family: 'Inter', Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: white;
             text-decoration: none;
-            letter-spacing: 1px;
+        }
+        .logo span {
+            color: #E51919;
         }
         .navbar-nav {
             display: flex;
@@ -287,7 +291,7 @@
 
     <!-- Top Bar Mirip pilih_tiket -->
     <nav class="top-bar">
-        <a href="index.html" class="logo"><span style="color:white;">Movi</span>X</a>
+        <a href="index.html" class="logo">Movi<span>X</span></a>
         <div class="navbar-nav">
             <a href="index.html" class="nav-link">Beranda</a>
             <a href="katalog" class="nav-link active">Katalog Film</a>
