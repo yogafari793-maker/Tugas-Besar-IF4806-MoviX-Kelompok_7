@@ -312,26 +312,26 @@
             
             <div class="filter-section">
                 <div class="filter-label">Genre</div>
-                <div class="filter-options">
-                    <label class="filter-checkbox"><input type="checkbox" checked> Semua Genre</label>
-                    <label class="filter-checkbox"><input type="checkbox"> Action</label>
-                    <label class="filter-checkbox"><input type="checkbox"> Drama</label>
-                    <label class="filter-checkbox"><input type="checkbox"> Horror</label>
-                    <label class="filter-checkbox"><input type="checkbox"> Komedi</label>
+                <div class="filter-options" id="genreFilter">
+                    <label class="filter-checkbox"><input type="checkbox" value="all" checked> Semua Genre</label>
+                    <label class="filter-checkbox"><input type="checkbox" value="Action"> Action</label>
+                    <label class="filter-checkbox"><input type="checkbox" value="Drama"> Drama</label>
+                    <label class="filter-checkbox"><input type="checkbox" value="Horror"> Horror</label>
+                    <label class="filter-checkbox"><input type="checkbox" value="Komedi"> Komedi</label>
                 </div>
             </div>
 
             <div class="filter-section">
                 <div class="filter-label">Rating Usia</div>
-                <div class="filter-options">
-                    <label class="filter-checkbox"><input type="checkbox" checked> Semua</label>
-                    <label class="filter-checkbox"><input type="checkbox"> SU</label>
-                    <label class="filter-checkbox"><input type="checkbox"> 13+</label>
-                    <label class="filter-checkbox"><input type="checkbox"> 17+</label>
+                <div class="filter-options" id="usiaFilter">
+                    <label class="filter-checkbox"><input type="checkbox" value="all" checked> Semua</label>
+                    <label class="filter-checkbox"><input type="checkbox" value="SU"> SU</label>
+                    <label class="filter-checkbox"><input type="checkbox" value="13+"> 13+</label>
+                    <label class="filter-checkbox"><input type="checkbox" value="17+"> 17+</label>
                 </div>
             </div>
 
-            <button class="btn-reset">Reset Filter</button>
+            <button class="btn-reset" id="resetBtn">Reset Filter</button>
         </aside>
 
         <!-- Main Content -->
@@ -342,7 +342,7 @@
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <div class="search-box">
                         <i class="fa-solid fa-search"></i>
-                        <input type="text" class="search-input" placeholder="Cari judul film...">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Cari judul film...">
                     </div>
                     <c:if test="${sessionScope.userRole == 'Admin'}">
                         <a href="<%= request.getContextPath() %>/admin?action=dashboard" 
@@ -421,5 +421,76 @@
         </main>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const searchInput = document.getElementById("searchInput");
+            const genreBoxes = document.querySelectorAll("#genreFilter input");
+            const usiaBoxes = document.querySelectorAll("#usiaFilter input");
+            const resetBtn = document.getElementById("resetBtn");
+            const cards = document.querySelectorAll(".movie-card");
+
+            function filterMovies() {
+                const query = searchInput.value.toLowerCase();
+                
+                // Collect selected genres
+                let selectedGenres = Array.from(genreBoxes).filter(b => b.checked).map(b => b.value);
+                if(selectedGenres.includes('all') || selectedGenres.length === 0) selectedGenres = ['all'];
+
+                // Collect selected usia
+                let selectedUsia = Array.from(usiaBoxes).filter(b => b.checked).map(b => b.value);
+                if(selectedUsia.includes('all') || selectedUsia.length === 0) selectedUsia = ['all'];
+
+                cards.forEach(card => {
+                    const title = card.querySelector(".movie-title").innerText.toLowerCase();
+                    const tags = card.querySelectorAll(".tag");
+                    const genre = tags[0].innerText;
+                    const usia = tags[2].innerText;
+
+                    let matchSearch = title.includes(query);
+                    let matchGenre = selectedGenres.includes('all') || selectedGenres.includes(genre);
+                    let matchUsia = selectedUsia.includes('all') || selectedUsia.includes(usia);
+
+                    if(matchSearch && matchGenre && matchUsia) {
+                        card.style.display = "flex";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            }
+
+            // Exclusive 'all' logic for genre
+            genreBoxes.forEach(box => {
+                box.addEventListener('change', (e) => {
+                    if(e.target.value === 'all' && e.target.checked) {
+                        genreBoxes.forEach(b => { if(b.value !== 'all') b.checked = false; });
+                    } else if(e.target.checked) {
+                        document.querySelector("#genreFilter input[value='all']").checked = false;
+                    }
+                    filterMovies();
+                });
+            });
+
+            // Exclusive 'all' logic for usia
+            usiaBoxes.forEach(box => {
+                box.addEventListener('change', (e) => {
+                    if(e.target.value === 'all' && e.target.checked) {
+                        usiaBoxes.forEach(b => { if(b.value !== 'all') b.checked = false; });
+                    } else if(e.target.checked) {
+                        document.querySelector("#usiaFilter input[value='all']").checked = false;
+                    }
+                    filterMovies();
+                });
+            });
+
+            searchInput.addEventListener("input", filterMovies);
+
+            resetBtn.addEventListener("click", () => {
+                searchInput.value = "";
+                genreBoxes.forEach(b => b.checked = b.value === 'all');
+                usiaBoxes.forEach(b => b.checked = b.value === 'all');
+                filterMovies();
+            });
+        });
+    </script>
 </body>
 </html>
