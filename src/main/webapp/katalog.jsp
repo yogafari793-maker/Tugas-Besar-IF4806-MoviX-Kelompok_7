@@ -337,11 +337,11 @@
                     <c:if test="${sessionScope.userRole == 'Admin'}">
                         <a href="<%= request.getContextPath() %>/admin?action=dashboard" 
                            style="background: #E51919; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-                            <span style="font-size: 18px;">\u2699</span> Panel Admin
+                            <i class="fa-solid fa-gear" style="font-size: 18px;"></i> Panel Admin
                         </a>
                         <a href="<%= request.getContextPath() %>/transaksiAdmin.jsp" 
                            style="background: #E51919; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 8px; margin-left: 10px;">
-                            <span style="font-size: 18px;">\ud83d\udcc3</span> Riwayat Transaksi
+                            <i class="fa-solid fa-file-invoice" style="font-size: 18px;"></i> Riwayat Transaksi
                         </a>
                     </c:if>
                 </div>
