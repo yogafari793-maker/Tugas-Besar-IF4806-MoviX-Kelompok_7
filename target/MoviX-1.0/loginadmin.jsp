@@ -1,16 +1,15 @@
 <%-- 
-    Document   : register
-    Created on : 21 May 2026, 10.34.20
-    Author     : ghifa
+    Document   : loginadmin
+    Created on : Jun 16, 2026, 9:58:05 AM
+    Author     : HP VICTUS
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 
-    <title>Register MoviX</title>
+    <title>Login Admin MoviX</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -57,18 +56,12 @@
                         <h1 class="logo"><span style="color:white;">Movi</span>X</h1>
 
                         <p class="text-muted">
-                            Buat akun baru
+                            Login Admin
                         </p>
 
                     </div>
 
-                    <form action="register" method="POST">
-
-                    <input type="hidden" name="action" value="login">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" required>
-                        <label>Nama Lengkap</label>
-                    </div>
+                    <form action="login" method="POST">
 
                     <input type="hidden" name="action" value="login">
                     <div class="form-floating mb-3">
@@ -82,26 +75,23 @@
 
                         <button type="submit"
                                 class="btn btn-danger w-100">
-
-                            Register
-
+                            Login sebagai admin
                         </button>
 
                     </form>
+                        <div class="text-center mt-4">
 
-                    <div class="text-center mt-4">
-
-                        Sudah punya akun?
+                        kembali ke
 
                         <a href="login.jsp"
                            class="text-decoration-none">
 
-                            Login
+                            login
 
                         </a>
-
+                        
+                        page
                     </div>
-
                 </div>
 
             </div>
