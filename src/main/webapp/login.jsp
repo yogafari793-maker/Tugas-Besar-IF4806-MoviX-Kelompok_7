@@ -58,9 +58,11 @@
 
                         <p class="text-muted">
                             Login
-                        </p>
+                            <a href="loginadmin.jsp"class="text-decoration-none">
+                            admin?
 
-                    </div>
+                        </a>
+                        </p>
 
                     <form action="login" method="POST">
 
@@ -91,7 +93,6 @@
                             Daftar disini
 
                         </a>
-
                     </div>
 
                 </div>

@@ -57,7 +57,7 @@
                         </h1>
 
                         <p class="text-muted">
-                            Login
+                            Login Admin
                         </p>
 
                     </div>
@@ -76,11 +76,23 @@
 
                         <button type="submit"
                                 class="btn btn-danger w-100">
-                            Login
+                            Login sebagai admin
                         </button>
 
                     </form>
+                        <div class="text-center mt-4">
 
+                        kembali ke
+
+                        <a href="login.jsp"
+                           class="text-decoration-none">
+
+                            login
+
+                        </a>
+                        
+                        page
+                    </div>
                 </div>
 
             </div>
