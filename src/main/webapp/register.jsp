@@ -65,44 +65,21 @@
 
                     <form action="register" method="POST">
 
-                        <div class="mb-3">
+                    <input type="hidden" name="action" value="login">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" required>
+                        <label>Nama Lengkap</label>
+                    </div>
 
-                            <label class="form-label">
-                                Nama Lengkap
-                            </label>
-
-                            <input type="text"
-                                   name="nama"
-                                   class="form-control"
-                                   required>
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-                                Username
-                            </label>
-
-                            <input type="text"
-                                   name="username"
-                                   class="form-control"
-                                   required>
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-                                Password
-                            </label>
-
-                            <input type="password"
-                                   name="password"
-                                   class="form-control"
-                                   required>
-
-                        </div>
+                    <input type="hidden" name="action" value="login">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="username" placeholder="Username" required>
+                        <label>Username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        <label>Password</label>
+                    </div>
 
                         <button type="submit"
                                 class="btn btn-danger w-100">
