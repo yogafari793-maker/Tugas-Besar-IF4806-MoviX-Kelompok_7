@@ -32,7 +32,59 @@ public class jadwalServlet extends HttpServlet {
 
         String path = request.getServletPath();
         String filmIdParam = request.getParameter("filmId");
+        String actionParam = request.getParameter("action");
 
+        if ("insertFilm".equals(actionParam)) {
+            try {
+                String judul = request.getParameter("judulFilm");
+                String genre = request.getParameter("genreFilm");
+                int durasi = Integer.parseInt(request.getParameter("durasiFilm"));
+
+                boolean sukses = jadwalDAO.insertFilm(judul, genre, durasi);
+                if (sukses) {
+                    request.setAttribute("success", "Film baru berhasil didaftarkan ke sistem!");
+                }
+            } catch (Exception e) {
+                System.err.println("Gagal insert film: " + e.getMessage());
+            }
+
+            // Refresh data gabungan jadwal untuk dikembalikan ke tampilan admin_jadwal.jsp
+            List<JadwalTayang> reguler = jadwalDAO.getByTipe("reguler");
+            List<JadwalTayang> premier = jadwalDAO.getByTipe("premier");
+            List<JadwalTayang> gabungan = new java.util.ArrayList<>(reguler);
+            gabungan.addAll(premier);
+
+            request.setAttribute("semuaJadwal", gabungan);
+            request.getRequestDispatcher("/WEB-INF/admin_jadwal.jsp").forward(request, response);
+            return;
+        }
+
+        if ("admin".equals(actionParam)) {
+            List<JadwalTayang> reguler = jadwalDAO.getByTipe("reguler");
+            List<JadwalTayang> premier = jadwalDAO.getByTipe("premier");
+            List<JadwalTayang> gabungan = new java.util.ArrayList<>(reguler);
+            gabungan.addAll(premier);
+
+            request.setAttribute("semuaJadwal", gabungan);
+            request.getRequestDispatcher("/WEB-INF/admin_jadwal.jsp").forward(request, response);
+            return;
+        }
+        
+        // Di dalam metode doGet, sebelum pengecekan filmIdParam, tambahkan logika delete di bawah ini:
+        if ("delete".equals(actionParam)) {
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
+                boolean sukses = jadwalDAO.delete(id);
+                if (sukses) {
+                    request.setAttribute("success", "Jadwal berhasil dihapus!");
+                }
+            } catch (Exception e) {
+                System.err.println("Gagal delete data: " + e.getMessage());
+            }
+            // Paksa pindah ke halaman admin kembali untuk refresh data
+            actionParam = "admin"; 
+        }
+        
         // VALIDASI: Jika tidak membawa ID Film, balikkan paksa ke index katalog film utama
         if (filmIdParam == null || filmIdParam.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/index.jsp");
@@ -93,6 +145,36 @@ public class jadwalServlet extends HttpServlet {
             throws ServletException, IOException {
         String jadwalIdParam = request.getParameter("jadwalId");
         String tipeParam = request.getParameter("tipe");
+        String actionParam = request.getParameter("action");
+        
+        // FITUR ADMIN: Proses input jadwal baru ke database
+        if ("insert".equals(actionParam)) {
+            try {
+                int filmId = Integer.parseInt(request.getParameter("filmId"));
+                int studioId = Integer.parseInt(request.getParameter("studioId"));
+                String hari = request.getParameter("hari");
+                String jamTayang = request.getParameter("jamTayang");
+                double harga = Double.parseDouble(request.getParameter("harga"));
+
+                boolean sukses = jadwalDAO.insert(filmId, studioId, hari, jamTayang, harga);
+                if (sukses) {
+                    request.setAttribute("success", "Jadwal baru berhasil ditambahkan ke database!");
+                }
+            } catch (Exception e) {
+                System.err.println("Gagal insert data: " + e.getMessage());
+            }
+
+            // Panggil ulang logika internal admin agar tabel ter-refresh otomatis
+            List<JadwalTayang> reguler = jadwalDAO.getByTipe("reguler");
+            List<JadwalTayang> premier = jadwalDAO.getByTipe("premier");
+            List<JadwalTayang> gabungan = new java.util.ArrayList<>(reguler);
+            gabungan.addAll(premier);
+
+            request.setAttribute("semuaJadwal", gabungan);
+            request.getRequestDispatcher("/WEB-INF/admin_jadwal.jsp").forward(request, response);
+            return;
+        }
+        
         if (tipeParam == null || tipeParam.isEmpty()) { tipeParam = "reguler"; }
 
         if (jadwalIdParam == null || jadwalIdParam.isEmpty()) {
@@ -115,6 +197,38 @@ public class jadwalServlet extends HttpServlet {
 
         } catch (NumberFormatException e) {
             response.sendRedirect(request.getContextPath() + "/index.jsp");
+        }
+        
+        // FITUR ADMIN: Proses input dan edit jadwal ke database
+        if ("insert".equals(actionParam) || "update".equals(actionParam)) {
+            try {
+                int filmId = Integer.parseInt(request.getParameter("filmId"));
+                int studioId = Integer.parseInt(request.getParameter("studioId"));
+                String hari = request.getParameter("hari");
+                String jamTayang = request.getParameter("jamTayang");
+                double harga = Double.parseDouble(request.getParameter("harga"));
+
+                if ("insert".equals(actionParam)) {
+                    boolean sukses = jadwalDAO.insert(filmId, studioId, hari, jamTayang, harga);
+                    if (sukses) request.setAttribute("success", "Jadwal baru berhasil ditambahkan!");
+                } else {
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    boolean sukses = jadwalDAO.update(id, filmId, studioId, hari, jamTayang, harga);
+                    if (sukses) request.setAttribute("success", "Jadwal berhasil diperbarui!");
+                }
+            } catch (Exception e) {
+                System.err.println("Gagal memproses data admin: " + e.getMessage());
+            }
+
+            // Panggil ulang logika internal admin agar tabel ter-refresh otomatis
+            List<JadwalTayang> reguler = jadwalDAO.getByTipe("reguler");
+            List<JadwalTayang> premier = jadwalDAO.getByTipe("premier");
+            List<JadwalTayang> gabungan = new java.util.ArrayList<>(reguler);
+            gabungan.addAll(premier);
+
+            request.setAttribute("semuaJadwal", gabungan);
+            request.getRequestDispatcher("/WEB-INF/admin_jadwal.jsp").forward(request, response);
+            return;
         }
     }
 }

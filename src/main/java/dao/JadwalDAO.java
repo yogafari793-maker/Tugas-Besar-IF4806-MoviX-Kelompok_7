@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao; // Pastikan murni 'dao'
+package dao; 
 
-import model.JadwalTayang; // Pastikan import ke model baru benar
-import util.Dbconnection;   // Pastikan import ke util baru benar
+import model.JadwalTayang; 
+import util.Dbconnection;  
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -130,5 +130,92 @@ public class JadwalDAO {
             rs.getString("jam_tayang"),
             rs.getDouble("harga")
         );
+    }
+    
+    // =========================================================
+    // TAMBAH DATA JADWAL (UNTUK PANEL ADMIN)
+    // =========================================================
+    public boolean insert(int filmId, int studioId, String hari, String jamTayang, double harga) {
+        String sql = "INSERT INTO jadwal_tayang (film_id, studio_id, hari, jam_tayang, harga) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = util.Dbconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, filmId);
+            ps.setInt(2, studioId);
+            ps.setString(3, hari);
+            ps.setString(4, jamTayang);
+            ps.setDouble(5, harga);
+
+            int rowsInserted = ps.executeUpdate();
+            return rowsInserted > 0;
+
+        } catch (SQLException e) {
+            System.err.println("[JadwalDAO] insert error: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    // =========================================================
+    // UPDATE DATA JADWAL (UNTUK PANEL ADMIN)
+    // =========================================================
+    public boolean update(int id, int filmId, int studioId, String hari, String jamTayang, double harga) {
+        String sql = "UPDATE jadwal_tayang SET film_id = ?, studio_id = ?, hari = ?, jam_tayang = ?, harga = ? WHERE id = ?";
+
+        try (Connection conn = util.Dbconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, filmId);
+            ps.setInt(2, studioId);
+            ps.setString(3, hari);
+            ps.setString(4, jamTayang);
+            ps.setDouble(5, harga);
+            ps.setInt(6, id);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("[JadwalDAO] update error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // =========================================================
+    // DELETE DATA JADWAL (UNTUK PANEL ADMIN)
+    // =========================================================
+    public boolean delete(int id) {
+        String sql = "DELETE FROM jadwal_tayang WHERE id = ?";
+
+        try (Connection conn = util.Dbconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("[JadwalDAO] delete error: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    // =========================================================
+    // TAMBAH DATA FILM BARU (UNTUK MODAL ADMIN)
+    // =========================================================
+    public boolean insertFilm(String judul, String genre, int durasi) {
+        String sql = "INSERT INTO film (judul, genre, durasi) VALUES (?, ?, ?)";
+
+        try (Connection conn = util.Dbconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, judul);
+            ps.setString(2, genre);
+            ps.setInt(3, durasi);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("[JadwalDAO] insertFilm error: " + e.getMessage());
+            return false;
+        }
     }
 }
