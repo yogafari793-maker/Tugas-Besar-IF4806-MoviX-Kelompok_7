@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author UPLAND
+ * @author DAFFA
  */
 public class TiketReguler extends Tiket {
     private final double HARGA_WEEKDAY = 35000.0;
