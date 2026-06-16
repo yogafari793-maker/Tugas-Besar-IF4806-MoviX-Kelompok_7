@@ -49,7 +49,7 @@ public class jadwalServlet extends HttpServlet {
                 if (film != null) {
                     request.setAttribute("filmId", filmIdParam);
                     request.setAttribute("namaFilm", film.getJudul());
-                    request.getRequestDispatcher("/WEB-INF/pilih_tiket.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/tiket.jsp").forward(request, response);
                 } else {
                     response.sendRedirect(request.getContextPath() + "/katalog");
                 }
