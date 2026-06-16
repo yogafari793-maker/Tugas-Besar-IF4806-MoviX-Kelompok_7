@@ -35,7 +35,7 @@ public class jadwalServlet extends HttpServlet {
 
         // VALIDASI: Jika tidak membawa ID Film, balikkan paksa ke index katalog film utama
         if (filmIdParam == null || filmIdParam.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/index.html");
+            response.sendRedirect(request.getContextPath() + "/katalog");
             return;
         }
 
@@ -43,18 +43,18 @@ public class jadwalServlet extends HttpServlet {
         if ("/jadwal".equals(path)) {
             try {
                 int filmId = Integer.parseInt(filmIdParam);
-                JadwalTayang infoFilm = jadwalDAO.getByFilmDanTipe(filmId, "reguler").stream().findFirst()
-                        .orElse(jadwalDAO.getByFilmDanTipe(filmId, "premier").stream().findFirst().orElse(null));
+                dao.FilmDAO filmDAO = new dao.FilmDAO();
+                model.Film film = filmDAO.getFilmById(filmId);
                 
-                if (infoFilm != null) {
+                if (film != null) {
                     request.setAttribute("filmId", filmIdParam);
-                    request.setAttribute("namaFilm", infoFilm.getNamaFilm());
+                    request.setAttribute("namaFilm", film.getJudul());
                     request.getRequestDispatcher("/WEB-INF/pilih_tiket.jsp").forward(request, response);
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/index.html");
+                    response.sendRedirect(request.getContextPath() + "/katalog");
                 }
             } catch (Exception e) {
-                response.sendRedirect(request.getContextPath() + "/index.html");
+                response.sendRedirect(request.getContextPath() + "/katalog");
             }
             return;
         }
@@ -96,7 +96,7 @@ public class jadwalServlet extends HttpServlet {
         if (tipeParam == null || tipeParam.isEmpty()) { tipeParam = "reguler"; }
 
         if (jadwalIdParam == null || jadwalIdParam.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/index.html");
+            response.sendRedirect(request.getContextPath() + "/katalog");
             return;
         }
 
@@ -105,7 +105,7 @@ public class jadwalServlet extends HttpServlet {
             JadwalTayang jadwal = jadwalDAO.getById(jadwalId);
 
             if (jadwal == null) {
-                response.sendRedirect(request.getContextPath() + "/index.html");
+                response.sendRedirect(request.getContextPath() + "/katalog");
                 return;
             }
 
@@ -114,7 +114,7 @@ public class jadwalServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/kursi?jadwalId=" + jadwalId);
 
         } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + "/index.html");
+            response.sendRedirect(request.getContextPath() + "/katalog");
         }
     }
 }
