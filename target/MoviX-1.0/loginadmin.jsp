@@ -16,7 +16,9 @@
     <style>
 
         body{
-            background-color: #141414;
+            background-color: #05070D;
+            color: white;
+            font-family: 'Inter', Arial, sans-serif;
         }
 
         .register-box{
@@ -25,14 +27,50 @@
 
         .card{
             border-radius: 15px;
-            box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
-            background-color: #8E97A4;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.6);
+            background-color: #0B0E14;
+            border: 1px solid #1E2530;
         }
 
         .logo { 
-                font-size:30px;
-                font-weight:bold; 
-                color:#E51919; 
+            font-size:30px;
+            font-weight:bold; 
+            color:#E51919; 
+        }
+
+        .text-muted {
+            color: #8E97A4 !important;
+        }
+
+        .form-floating > .form-control {
+            background-color: #0F131D;
+            border: 1px solid #1E2530;
+            color: white;
+        }
+
+        .form-floating > .form-control:focus {
+            background-color: #0F131D;
+            color: white;
+            border-color: #E51919;
+            box-shadow: none;
+        }
+
+        .form-floating > label {
+            color: #8E97A4;
+        }
+        
+        .form-floating > .form-control:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px #0F131D inset !important;
+            -webkit-text-fill-color: white !important;
+        }
+
+        .btn-danger {
+            background-color: #E51919;
+            border-color: #E51919;
+        }
+        .btn-danger:hover {
+            background-color: #cc0000;
+            border-color: #cc0000;
         }
 
     </style>
