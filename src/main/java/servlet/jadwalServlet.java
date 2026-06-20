@@ -65,7 +65,8 @@ public class jadwalServlet extends HttpServlet {
 
         try {
             int filmId = Integer.parseInt(filmIdParam);
-            jadwalList = jadwalDAO.getByFilmDanTipe(filmId, tipe);
+            String tipeDb = "premier".equals(tipe) ? "Premiere" : "Reguler";
+            jadwalList = jadwalDAO.getByFilmDanTipe(filmId, tipeDb);
             request.setAttribute("filmId", filmId);
         } catch (NumberFormatException e) {
             jadwalList = java.util.Collections.emptyList();
