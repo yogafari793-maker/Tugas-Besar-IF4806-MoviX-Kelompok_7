@@ -82,8 +82,8 @@
                                 <label>Pilih Studio</label>
                                 <select name="studioId" id="studioId" class="form-control" required>
                                     <option value="1">Studio 1 (Reguler)</option>
-                                    <option value="2">Studio 2 (Reguler)</option>
-                                    <option value="5">Studio Premier 1 (Premier)</option>
+                                    <option value="2">Studio 2 (Premiere)</option>
+                                    <option value="3">Studio 3 (Reguler)</option>
                                 </select>
                             </div>
                             <div class="form-group">
