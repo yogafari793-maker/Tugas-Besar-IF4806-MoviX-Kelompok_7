@@ -152,14 +152,12 @@
                     <div class="badge badge-reg">Reguler</div>
                     <div class="card-title">Kelas Reguler</div>
                     <div class="card-desc">Format audio standar dengan kursi empuk ergonomis dan layar jernih berkualitas tinggi.</div>
-                    <div class="price">Rp 35.000</div>
                 </a>
 
                 <a href="<%= request.getContextPath() %>/jadwal/premier?filmId=<%= filmId %>" class="ticket-card">
                     <div class="badge badge-pre">⭐ Premier</div>
                     <div class="ticket-title card-title">Kelas Premier</div>
                     <div class="card-desc">Rasakan kemewahan menonton dengan sofa reclining kulit premium eksklusif dan selimut hangat.</div>
-                    <div class="price" style="color:#E51919;">Rp 75.000</div>
                 </a>
             </div>
         </div>
