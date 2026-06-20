@@ -313,9 +313,10 @@
                 <div class="filter-label">Genre</div>
                 <div class="filter-options" id="genreFilter">
                     <label class="filter-checkbox"><input type="checkbox" value="all" checked> Semua Genre</label>
-                    <c:forEach var="genre" items="${daftarGenre}">
-                        <label class="filter-checkbox"><input type="checkbox" value="${genre}"> ${genre}</label>
-                    </c:forEach>
+                    <label class="filter-checkbox"><input type="checkbox" value="Action"> Action</label>
+                    <label class="filter-checkbox"><input type="checkbox" value="Drama"> Drama</label>
+                    <label class="filter-checkbox"><input type="checkbox" value="Horror"> Horror</label>
+                    <label class="filter-checkbox"><input type="checkbox" value="Komedi"> Komedi</label>
                 </div>
             </div>
 

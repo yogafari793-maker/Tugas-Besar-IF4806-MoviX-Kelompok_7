@@ -1,0 +1,8 @@
+# Mengabaikan folder hasil kompilasi NetBeans
+build/
+nbproject/private/
+dist/
+
+# Mengabaikan file log dan file temporary
+*.log
+nbworkspace/
